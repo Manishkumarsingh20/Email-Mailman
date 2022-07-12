@@ -1,0 +1,26 @@
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border: 3px solid black;
+}
+
+.form1 {
+    width: 41%;
+    position: absolute;
+    bottom: 0px;
+    right: 28px;
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.dropdown-menu[data-bs-popper] {
+    top: 75% !important;
+}
+
+.dropdown-menu-end[data-bs-popper] {
+    right: 30px !important;
+}

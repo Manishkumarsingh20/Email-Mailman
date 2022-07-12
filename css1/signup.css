@@ -1,0 +1,752 @@
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+
+    background: rgb(100, 97, 97);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.form1 {
+
+    position: absolute;
+    top: 67px;
+    left: 398px;
+
+}
+
+#write {
+
+    margin: 0px 0px 0px -69px;
+
+}
+
+.form1 input[type="text"] {
+
+    color: black;
+    height: 35px;
+    width: 355px;
+    margin: 30px 0px 0px -410px;
+
+}
+
+.form1 input[type="password"] {
+
+    color: black;
+    height: 35px;
+    width: 355px;
+    margin: 30px 0px 0px -239px;
+    width: 533px;
+
+}
+
+.email1 input[type="email"] {
+
+    color: black;
+    height: 35px;
+    margin: 0px 0px 0px -231px;
+    width: 427px;
+
+}
+
+.email2 input[type="email"] {
+
+    color: black;
+    height: 35px;
+    margin: 30px 0px 0px -243px;
+    width: 533px;
+
+}
+
+
+.myemail {
+
+    color: white;
+}
+
+
+.create {
+
+    position: absolute;
+    top: 65px;
+    left: 257px;
+    color: black;
+
+}
+
+.container {
+
+    background-color: white;
+    width: 857px;
+    height: 673px;
+    position: absolute;
+    top: 30x;
+    left: 71px;
+    text-align: center;
+    border-radius: 34px;
+    box-shadow: 40px;
+    margin: 70px 0px 0px 0px;
+
+}
+
+.form1 p {
+
+    color: rgb(11, 70, 230);
+    position: relative;
+    top: 6px;
+    left: -262px;
+    font-size: 15px;
+
+}
+
+.login img {
+
+    width: 71px;
+    position: relative;
+    left: 0px;
+    top: 7px
+}
+
+.login h1 {
+
+    color: red;
+}
+
+.login {
+
+    position: relative;
+    left: -350px;
+    top: 12px;
+}
+
+.cpa {
+
+    position: relative;
+    left: -234px !important;
+}
+
+.em {
+
+    position: relative;
+    left: -275px !important;
+}
+
+.avail {
+    margin: -7px 0px 0px 388px;
+
+}
+
+
+.login h2 {
+
+    color: blue;
+    position: relative;
+    top: 0px;
+    left: 0px;
+
+}
+
+.btn {
+
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    font-size: 10px;
+    font-weight: 10px;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    top: 0px;
+    bottom: 0px;
+
+}
+
+
+.btn {
+
+    width: 239px;
+    height: 32px;
+    background-color: red;
+    font-size: 19px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    top: 49px;
+    bottom: 0px;
+
+}
+
+.btn {
+
+    position: relative;
+    top: 0px;
+    left: -156px;
+
+}
+
+
+
+
+.upload {
+
+    width: 100px;
+    position: relative;
+    left: 400px;
+    top: -186px;
+    margin: 272px 0px 0px 242px;
+
+}
+
+.upload img {
+
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+input[type='file'] {
+
+    cursor: pointer;
+    position: relative;
+    top: 167px;
+    left: 178px;
+
+}
+
+.btn:hover {
+
+    background: rgb(64, 138, 199);
+    cursor: pointer;
+
+}
+
+
+
+
+.btn1 {
+
+    position: absolute;
+    top: 62px;
+    left: 367px;
+    width: 96px;
+    height: 20px;
+    font-weight: bold;
+    background: #e3ede8;
+    border: none;
+    border-radius: 10px;
+    color: #121111;
+
+}
+
+.btn1:hover {
+
+    background: rgb(64, 138, 199);
+    cursor: pointer;
+
+}
+
+.form1 input[type="checkbox"] {
+
+    color: white;
+    position: relative;
+    top: -15px;
+    left: -378px;
+
+}
+
+.CB {
+
+    margin: 0px 0px 0px 56px;
+}
+
+/* meadia query */
+
+/* mobile device */
+@media only screen and (max-width:480px) {
+
+    * {
+
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+    }
+
+
+
+    html,
+    body {
+
+        width: 100%;
+        overflow: hidden;
+
+    }
+
+    span {
+
+        display: none;
+
+    }
+
+
+    #write {
+
+        margin: 0px 0px 0px 106px;
+    }
+
+    .container {
+
+        overflow: hidden;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+    }
+
+    .form1 {
+
+        width: 491px;
+        margin: 53px 0px 0px -322px;
+
+    }
+
+
+    .form1 input[type="text"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -315px;
+
+    }
+
+
+    .form1 input[type="password"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -316px;
+
+    }
+
+
+    .form1 input[type="email"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -316px;
+
+    }
+
+    .email2 input[type="email"] {
+        width: 276px;
+        margin: 15px 0px 0px -316px;
+
+    }
+
+    .login h1 {
+
+        position: relative;
+        left: 111px;
+        top: 20px;
+
+    }
+
+    .form1 input[type="checkbox"] {
+
+        width: 550px;
+        margin: 0px 0px 0px 41px;
+
+    }
+
+    .CB {
+
+        margin: 13px 0px 0px 200px;
+
+    }
+
+    .upload img {
+
+        width: 120px;
+        height: 87px;
+
+    }
+
+    input[type='file'] {
+
+        cursor: pointer;
+        position: relative;
+        top: -94px;
+        left: -65px;
+        width: 101px;
+
+    }
+
+    .create {
+
+        position: absolute;
+        top: 81px;
+        left: -7px;
+        width: 194px;
+        color: black;
+
+    }
+
+    .btn {
+
+        margin: -9px 12px 0px -273px;
+        position: relative;
+        top: -12px;
+        left: -21px;
+        width: 78px;
+
+    }
+
+    .upload {
+
+        width: 100px;
+        position: absolute;
+        left: -137px;
+        top: -279px;
+
+    }
+
+    .upload img {
+
+        width: 88px;
+        height: 61px;
+        position: relative;
+        left: 2px;
+        top: 17px;
+
+    }
+
+
+    .btn1 {
+
+        position: absolute;
+        top: 620px;
+        left: 21px;
+
+    }
+}
+
+/* Low Resolution Tablets and ipads  */
+@media only screen and (min-width:481px) and (max-width:767px) {
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .container {
+
+        overflow: hidden;
+
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+
+    .upload img {
+
+        width: 120px;
+        height: 87px;
+    }
+
+    input[type='file'] {
+        cursor: pointer;
+        position: relative;
+        top: 149px;
+        left: 159px;
+    }
+
+
+    #write {
+        margin: 0px 0px 0px 106px;
+    }
+
+    .create {
+
+        position: absolute;
+        top: 65px;
+        left: 257px;
+        color: black
+    }
+
+    .form1 {
+
+
+        width: 491px;
+        margin: 53px 0px 0px -322px;
+    }
+
+
+    .form1 input[type="text"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+
+    }
+
+
+    .form1 input[type="password"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+
+
+    }
+
+
+    .form1 input[type="email"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -201px;
+    }
+
+    .email2 input[type="email"] {
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+    }
+
+    .login h1 {
+        position: relative;
+        left: 111px;
+        top: 20px;
+    }
+
+    .form1 input[type="checkbox"] {
+        width: 550px;
+        margin: 0px 0px 0px 41px;
+    }
+
+    .CB {
+
+        margin: 13px 0px 0px 200px;
+
+
+    }
+
+
+    .create {
+        position: absolute;
+        top: 81px;
+        left: 141px;
+        width: 194px;
+        color: white;
+    }
+
+    .btn {
+        margin: -9px 12px 0px -273px;
+        position: relative;
+        top: -12px;
+        left: -21px;
+        width: 78px;
+    }
+
+    .upload {
+
+
+        width: 100px;
+        position: absolute;
+        left: 131px;
+        top: -141px;
+    }
+
+
+    .upload img {
+        width: 88px;
+        height: 61px;
+        position: relative;
+        left: 2px;
+        top: 17px;
+    }
+
+
+    .btn1 {
+
+        position: absolute;
+
+        top: 620px;
+        left: 21px;
+    }
+}
+
+
+/* Tablets Ipads portrait mode  */
+
+@media only screen and (min-width:768px) and (max-width:1050px) {
+
+
+
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+
+    #write {
+        margin: 0px 0px 0px 106px;
+    }
+
+    .container {
+
+        overflow: hidden;
+
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .form1 {
+
+
+        width: 491px;
+        margin: 53px 0px 0px -322px;
+    }
+
+    .upload img {
+        width: 108px;
+        height: 85px;
+        position: relative;
+        left: 136px;
+        top: 194px;
+    }
+
+    .form1 input[type="text"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+
+    }
+
+    .create {
+        position: absolute;
+        top: 81px;
+        left: 141px;
+        width: 194px;
+        color: #09090a;
+    }
+
+    .form1 input[type="password"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+
+
+    }
+
+
+    .form1 input[type="email"] {
+
+        width: 276px;
+        margin: 15px 0px 0px -200px;
+    }
+
+    .email2 input[type="email"] {
+        width: 276px;
+        margin: 15px 0px 0px -311px;
+    }
+
+
+    .login h1 {
+        position: relative;
+        left: 70px;
+        top: 20px;
+    }
+
+    .login h2 {
+        color: blue;
+        position: relative;
+        top: 25px;
+        left: -38px;
+        display: none;
+    }
+
+
+    .form1 input[type="checkbox"] {
+        width: 550px;
+        margin: 0px 0px 0px 41px;
+    }
+
+    .CB {
+
+        margin: 13px 0px 0px 200px;
+
+
+    }
+
+
+    .create {
+        position: absolute;
+        top: 81px;
+        left: 141px;
+        width: 194px;
+        color: white;
+    }
+
+    .btn {
+        margin: -9px 12px 0px -273px;
+        position: relative;
+        top: -12px;
+        left: -21px;
+        width: 78px;
+    }
+
+    .upload {
+
+
+        width: 100px;
+        position: absolute;
+        left: -46px;
+        top: -279px;
+    }
+
+
+    .upload img {
+        width: 88px;
+        height: 61px;
+        position: relative;
+        left: 2px;
+        top: 17px;
+    }
+
+
+    .btn1 {
+
+        position: absolute;
+
+        top: 620px;
+        left: 21px;
+    }
+}

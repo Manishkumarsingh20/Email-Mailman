@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:rgb(131, 128, 128);
+}
+
+img{
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    
+  
+
+
+}
+
+.row{
+    background: white;
+    border-radius:11px;
+    
+}
+.img img{
+    margin:0px 0px 0px 0px;
+}
