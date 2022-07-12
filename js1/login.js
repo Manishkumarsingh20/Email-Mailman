@@ -19,12 +19,7 @@ function myvalidation() {
     } else {
         cpassword1.style.border = "2px solid red";
     }
-    if (!re || !cpass1) {
-        return false
-
-    } else {
-        return true
-    }
+    
 
 
 }
