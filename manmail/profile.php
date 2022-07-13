@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-die("a");
+//die("a");
 include_once "../php/dbconnect.php";
 session_start();
 if ($_SESSION['login']) {
