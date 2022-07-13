@@ -35,7 +35,7 @@ try {
     $mail->Subject = 'Password Reset';
     $mail->Body    = 'To reset your password click <a href="http://localhost/project/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
 
-    $conn = new mySqli('localhost', 'root', 'hestabit', 'mydata');
+    $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ','manish');
 
     if ($conn->connect_error) {
         die('Could not connect to the database.');
