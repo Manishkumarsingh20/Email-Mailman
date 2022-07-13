@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 if ($_SESSION['login']) {
 
     include_once "../php/dbconnect.php";
