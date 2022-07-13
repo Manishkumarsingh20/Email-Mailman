@@ -1,4 +1,5 @@
 <?php
+die("a");
 include_once "../php/dbconnect.php";
 include_once "./dashboard.php";
 $obj = new dbconnection;
