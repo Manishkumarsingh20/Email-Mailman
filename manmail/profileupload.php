@@ -118,7 +118,7 @@ if ($_SESSION['login']) {
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
                                     <input type="file" class="type djkdfjk" name="picture">
                                     <?php echo $_SESSION['picture']; ?>
-                                    <img src="<?php echo 'http://hestalabs.com/tse/manish-mailman/images/'.$_SESSION['picture']; ?>" alt="" class="" style="width:300px">
+                                    <img src="<?php echo 'http://hestalabs.com/tse/mailnam-manish/images/'.$_SESSION['picture']; ?>" alt="" class="" style="width:300px">
 
                                 </div>
                             </div>
