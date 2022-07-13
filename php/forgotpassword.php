@@ -33,7 +33,7 @@ try {
  
     $mail->isHTML(true);                                 
     $mail->Subject = 'Password Reset';
-    $mail->Body    = 'To reset your password click <a href="http://localhost/project/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
+    $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
 
     $conn = new mySqli('localhost', 'root', 'hestabit', 'mydata');
 
