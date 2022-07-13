@@ -16,7 +16,7 @@ if ($_SESSION['login']) {
         $message = $_POST['message'];
         $attachement = $_FILES['pictures']['name'];
         $name_image_temp = $_FILES['pictures']['tmp_name'];
-        move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $attachement);
+        move_uploaded_file($name_image_temp, "../images/" . $attachement);
         $query_insert = $obj->insert_compose($to, $from, $subject, $cc, $bcc, $message, $attachement);
     }
 
@@ -31,7 +31,7 @@ if ($_SESSION['login']) {
         $message = $_POST['message'];
         $attachement = $_FILES['pictures']['name'];
         $name_image_temp = $_FILES['pictures']['tmp_name'];
-        move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $attachement);
+        move_uploaded_file($name_image_temp, "../images/" . $attachement);
         $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
     }
 
@@ -86,7 +86,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" alt="img">
+                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="img">
                 </div>
             </div>
             </div>
