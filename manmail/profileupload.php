@@ -15,7 +15,7 @@ if ($_SESSION['login']) {
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
         // move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $picture);
-        move_uploaded_file($name_image_temp, "../images/" . $picture);
+        move_uploaded_file($name_image_temp, "http://hestalabs.com/tse/mailnam-manish/images/" . $picture);
         $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
     }
 
