@@ -88,7 +88,7 @@ if ($_SESSION['login']) {
                                     </div>
                                 </div>
                                 <div class="col-sm-6 py-5 ">
-                                    <img src="../images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="">
+                                    <img src="/images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="">
                                 </div>
                             </div>
                         </form>
