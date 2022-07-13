@@ -1,7 +1,7 @@
 <?php
 
 include_once "../php/dbconnect.php";
-
+session_start();
 if ($_SESSION['login']) {
     $db = new dbconnection;
     $result = $db->getoneelement($_SESSION['id']);
@@ -56,7 +56,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/<?php echo $_SESSION['picture'] ?>" alt="img">
+                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="img">
                 </div>
             </div>
             </div>
