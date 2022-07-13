@@ -13,7 +13,7 @@ if ($_SESSION['login']) {
         $secondemail = $_POST['recoveryemail'];
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
-        move_uploaded_file($name_image_temp, "http://hestalabs.com/tse/manish-mailman/images" . $picture);
+        move_uploaded_file($name_image_temp, "../images/" . $picture);
         $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
     }
 
@@ -71,7 +71,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src=<?php echo 'http://hestalabs.com/tse/manish-mailman/images '.$_SESSION['picture'] ?> alt="img">
+                    <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" alt="img">
                 </div>
             </div>
             </div>
