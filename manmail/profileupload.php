@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 if ($_SESSION['login']) {
 
@@ -115,7 +117,7 @@ if ($_SESSION['login']) {
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
                                     <input type="file" class="type" name="picture">
-                                    <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
+                                    <img src=<?php echo 'http://hestalabs.com/tse/manish-mailman/images '.$_SESSION['picture'] ?>alt="" class="" style="width:300px">
 
                                 </div>
                             </div>
