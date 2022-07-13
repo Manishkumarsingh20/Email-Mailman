@@ -2,9 +2,9 @@
 class DB
 {
 
-	protected $db_name = 'mydata';
-	protected $db_user = 'root';
-	protected $db_pass = 'hestabit';
+	protected $db_name = 'manish';
+	protected $db_user = 'tse';
+	protected $db_pass = 'bPmtHasjyTJ2SgZJ';
 	protected $db_host = 'localhost';
 	public $connect_db;
 	public function __construct()
