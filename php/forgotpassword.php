@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 if (isset($_POST['reset'])) {
     $email = $_POST['email'];
@@ -27,8 +27,8 @@ try {
     $mail->Port       = 465;                                    
    
     $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-    $to_mail = $_POST['email'];
-    $mail->addAddress($to_mail);     
+    // $to_mail = $_POST['email'];
+    $mail->addAddress($email);     
     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
