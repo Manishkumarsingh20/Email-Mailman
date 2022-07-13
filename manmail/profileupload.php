@@ -13,7 +13,7 @@ if ($_SESSION['login']) {
         $secondemail = $_POST['recoveryemail'];
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
-        move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $picture);
+        move_uploaded_file($name_image_temp, "/images/" . $picture);
         $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
     }
 
@@ -115,7 +115,7 @@ if ($_SESSION['login']) {
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
                                     <input type="file" class="type" name="picture">
-                                    <img src="/project/images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
+                                    <img src="/images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
 
                                 </div>
                             </div>
