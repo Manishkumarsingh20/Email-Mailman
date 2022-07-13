@@ -115,8 +115,8 @@ if ($_SESSION['login']) {
 
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
-                                    <input type="file" class="type" name="picture">
-                                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
+                                    <input type="file" class="type imgs" name="picture">
+                                    <img src="http://hestalabs.com/tse/manish-mailman/images/<?php echo $_SESSION['picture'] ?>"<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
 
                                 </div>
                             </div>

@@ -16,7 +16,7 @@ if (isset($_POST['signup'])) {
     $file_type = $FILES['picture']['type'];
 
 
-    if (move_uploaded_file($file_tmp_name, "/var/www/html/project/images/" . $file_name)) {
+    if (move_uploaded_file($file_tmp_name, "../images/" . $file_name)) {
         echo "uploaded files";
     } else {
         echo "not uploaded files";
