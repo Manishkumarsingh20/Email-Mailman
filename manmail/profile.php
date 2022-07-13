@@ -56,7 +56,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/<?php echo $_SESSION['picture'] ?>" alt="img">
+                <img src=<?php echo 'http://hestalabs.com/tse/manish-mailman/images '.$_SESSION['picture'] ?>  alt="img">
                 </div>
             </div>
             </div>
@@ -95,7 +95,7 @@ if ($_SESSION['login']) {
                         </form>
                     </div>
                     <div class="col-sm-6 mt-3">
-                        <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="" class="img-fluid">
+                    <img src=<?php echo 'http://hestalabs.com/tse/manish-mailman/images '.$_SESSION['picture'] ?>  style="width:300px" alt="" class="img-fluid">
                     </div>
                     <a class="col-sm-6" href="profileupload.php?updateid=<?= $result['id'] ?>">Edit Profile</a> <a href="changeoldpassword.php?changeoldpasswordid=<?= $result['id'] ?>">Change password</a>
                 </div>
