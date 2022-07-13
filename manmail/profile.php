@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 //die("a");
 include_once "../php/dbconnect.php";
-session_start();
+
 if ($_SESSION['login']) {
     $db = new dbconnection;
     $result = $db->getoneelement($_SESSION['id']);
