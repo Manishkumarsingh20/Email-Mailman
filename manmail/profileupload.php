@@ -13,7 +13,7 @@ if ($_SESSION['login']) {
         $secondemail = $_POST['recoveryemail'];
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
-        move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $picture);
+        move_uploaded_file($name_image_temp, "http://hestalabs.com/tse/manish-mailman/images" . $picture);
         $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
     }
 
