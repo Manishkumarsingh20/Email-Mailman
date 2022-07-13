@@ -58,7 +58,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" alt="img">
+                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="img">
                 </div>
             </div>
             </div>
@@ -88,7 +88,7 @@ if ($_SESSION['login']) {
                                     </div>
                                 </div>
                                 <div class="col-sm-6 py-5 ">
-                                    <img src="http://localhost/project/images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="">
+                                    <img src="../images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="">
                                 </div>
                             </div>
                         </form>

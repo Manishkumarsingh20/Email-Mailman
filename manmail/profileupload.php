@@ -14,7 +14,8 @@ if ($_SESSION['login']) {
         $secondemail = $_POST['recoveryemail'];
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
-        move_uploaded_file($name_image_temp, "http://hestalabs.com/tse/manish-mailman/images/" . $picture);
+        // move_uploaded_file($name_image_temp, "/var/www/html/project/images/" . $picture);
+        move_uploaded_file($name_image_temp, "../images/" . $picture);
         $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
     }
 
@@ -45,7 +46,7 @@ if ($_SESSION['login']) {
         <nav class="navbar navbar-light bg-info p-3">
             <div class="col-12 col-md-3 col-lg-3 mb-2 flex-wrap flex-md-nowrap d-flex justify-content-between">
                 <a class="navbar-brand" href="#">MAILMAN
-                    <figure img src="http://hestalabs.com/tse/manish-mailman/img1/j.png" alt="mailman"></figure>
+                    <figure img src="../img1/j.png" alt="mailman"></figure>
                 </a>
                 <!-- //check -->
                 <button class="navbar-toggler mb-3  collapsed d-md-none" type="button" data-toggle="collapse" data-target="#sidebar">
@@ -72,7 +73,7 @@ if ($_SESSION['login']) {
                     </ul>
                 </div>
                 <div class="profile_image" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="http://hestalabs.com/tse/manish-mailman/images/<?php echo $_SESSION['picture'] ?>" alt="img">
+                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="img">
                 </div>
             </div>
             </div>
@@ -115,8 +116,8 @@ if ($_SESSION['login']) {
 
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
-                                    <input type="file" class="type imgs" name="picture">
-                                    <img src="http://hestalabs.com/tse/manish-mailman/images/<?php echo $_SESSION['picture'] ?>"<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
+                                    <input type="file" class="type djkdfjk" name="picture">
+                                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
 
                                 </div>
                             </div>
