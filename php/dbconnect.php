@@ -202,4 +202,38 @@ $sql="SELECT * FROM email WHERE from_send='$email' AND todelete=1 AND fromdelete
 $result=$this->connect_db->query($sql);
 return $result;
 }
+
+
+public function email_alreadyexsist($email){
+    $email=$_POST['email'];
+    $sql="SELECT email FROM users WHERE email='$email'";
+    $result=$this->connect_db->query($sql);
+    if(mysqli_num_rows($result)>0){
+        echo json_encode("Email id is already taken");
+    }else{
+        echo json_encode("Its available");
+    }
 }
+
+public function username_already($username){
+    $username=$_POST['username'];
+    $sql="SELECT username FROM users WHERE username='$username'";
+    $result=$this->connect_db->query($sql);
+    if(mysqli_num_rows($result)>0){
+        echo json_encode("username id is already taken");
+    }else{
+        echo json_encode("Its available");
+    }
+}
+
+}
+
+
+$obj = new dbconnection();
+if(isset($_POST['check_Emailbtn']) && !empty($_POST['check_Emailbtn'])){
+    $obj->email_alreadyexsist($_POST['check_Emailbtn']);
+}
+if(isset($_POST['check_userbtn']) && !empty($_POST['check_userbtn'])){
+    $obj->username_already($_POST['check_userbtn']);
+}
+// print_r($_POST); die(" gg ");
