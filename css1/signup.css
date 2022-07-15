@@ -95,7 +95,7 @@ html {
 
 }
 
-.form1 p {
+.CB {
 
     color: rgb(11, 70, 230);
     position: relative;
@@ -139,6 +139,7 @@ html {
 
 .avail {
     margin: -7px 0px 0px 388px;
+    color:#ffffff00;
 
 }
 
