@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 
 <!doctype html>
 
@@ -51,6 +55,30 @@
             </div>
         </div>
     </section>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php
+
+if(isset($_SESSION['status']) && $_SESSION['status'] !='')
+{
+
+    ?>
+
+<script>swal({
+  title: "<?php echo $_SESSION['status']  ?>",
+  text: "Please press ok to login!",
+  icon: "<?php echo $_SESSION['status_code']  ?>",
+  button: "Ok Done",
+}); 
+</script>
+    <?php
+unset($_SESSION['status']);
+
+}
+
+
+?>
+
     <script src="../js1/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

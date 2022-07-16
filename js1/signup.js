@@ -41,11 +41,11 @@ function validationstart() {
     var pattern = /^[a-zA-Z0-9]+$/;
     if (username.match(pattern)) {
 
-        username1.style.border = "2px solid green";
-        usernamespane.innerHTML="";
+        // username1.style.border = "2px solid green";
+        // usernamespane.innerHTML="";
     } else {
 
-        username1.style.border = "2px solid red";
+        // username1.style.border = "2px solid red";
         usernamespane.innerHTML="**Please donot give space(0-9 or a-zA-Z)";
     }
 
@@ -57,11 +57,11 @@ function validationstart() {
     var email2 = /^[\w.+\-]+@mailman\.com$/;
     if (email1.match(email2)) {
 
-        email3.style.border = "2px solid green";
-        emailnamespane.innerHTML="";
+        // email3.style.border = "2px solid green";
+        // emailnamespane.innerHTML="";
 
     } else {
-        email3.style.border = "2px solid red";
+        // email3.style.border = "2px solid red";
         emailnamespane.innerHTML="**Please add @mailman.com";
     }
 
@@ -136,13 +136,13 @@ function validationstart() {
     // console.log('checkbox.checkbox', checkbox)
     if (checkbox === true) {
         
-        checkboxx.innerHTML = 'done'
+        // checkboxx.innerHTML = 'done'
        
       
        
     }
     else {
-        checkboxx.innerHTML = 'Please check Term and Condition'
+        // checkboxx.innerHTML = 'Please check Term and Condition'
         return false;
         
        
@@ -166,7 +166,7 @@ function validationstart() {
                     document.getElementById('pictures').innerHTML = "Image Uploaded";
                 };
                 reader.readAsDataURL(fileInput.files[0]);
-               return true;
+               return true
                 
             }
         }
@@ -189,6 +189,8 @@ function validationstart() {
     } else {
         return true
     }
+
+    
 
 }
 

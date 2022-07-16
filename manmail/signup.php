@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +34,8 @@
 
     #usererror {
         color: red;
+        position: relative;
+        left: -25px;
     }
 
     #emailerror {
@@ -57,7 +63,7 @@
     <!-- container start -->
     <section>
         <div class="container" style="
-    height: 792px;">
+    height: 792px; ">
 
             <!-- logo design start -->
             <div class="login">
@@ -72,13 +78,28 @@
                 </div>
             </div>
             <!-- upload img end -->
-            <div class="create">
+            <div class="create ">
                 Create An Account
             </div>
+            <div>
+            <p id=emailhaserror></p>
+            <?php
+            if(isset($_SESSION['status']))
+    {
+        ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Hey !</strong> <?= $_SESSION['status']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+        unset($_SESSION['status']);
+    }
+
+    ?>
             <!-- form start -->
             <div class="form1">
-                <form method="post" action="../php/insert.php" enctype="multipart/form-data" autocomplete="off">
-
+                <form method="post" action="../php/insert.php" enctype="multipart/form-data" autocomplete="off" onsubmit="return submitForm(this);">
+                    
                     <div>
                         <input type="text" name="fname" onchange="return validationstart()" placeholder="Enter Your Firstname" id="f1" autocomplete="off">
                         <br> <span id="error" style="margin: 0px 0px 0px -480px"></span>
@@ -89,16 +110,17 @@
                     </div>
 
                     <div>
-                        <input type="text" name="uname"  class="user_id"onchange="return validationstart()" placeholder="Enter Username" id="u1" autocomplete="off">
-                        <br> <span id="usererror" style="margin: 0px 0px 0px -477px;"></span>
+                        <input type="text" name="uname"  class="user_id" placeholder="Enter Username" id="u1" autocomplete="off">
+                        <br> <span id="usererror" class="user_name usernameclass"style="margin: 0px 0px 0px -455px;"></span>
+                        
                     </div>
 
                     <div>
                         <p  class="avail ">Availability*</p>
                     </div>
                     <div class="email1">
-                        <input type="Email" name="rmail" class="email_id" onchange="return validationstart()" placeholder="Enter Your Email" id="email1" autocomplete="off"><span>@mailman.com</span>
-                        <br> <span id="emailerror" style="margin: 0px 0px 0px -554px"></span>
+                        <input type="Email" name="rmail" class="email_id"  placeholder="Enter Your Email" id="email1" autocomplete="off"><span>@mailman.com</span>
+                        <br> <span id="emailerror" class="email_name" style="margin: 0px 0px 0px -568px"></span>
                     </div>
                     <div class="email2">
                         <input type="Email" name="mmail" onchange="return validationstart()" placeholder="Enter Your Recovery Email" id="remail1" autocomplete="off">
@@ -116,7 +138,7 @@
                     </div>
                     <div>
                         <P class="CB" style= "margin: 0px 0px 0px 67px;">I agree to term & condition of MailMan</P>
-                        <input type="checkbox" style="position: relative;top:-16px;left:-251px; position:relative;left:-254px" onchange="return validationstart()" id="checkbox" autocomplete="off">
+                        <input type="checkbox" style="position: relative;top:-16px;left:-251px; position:relative;left:-369px" onchange="return validationstart()" id="checkbox" autocomplete="off">
                         <span id=checkboxx></span>
                     </div>
                     <div>
@@ -157,17 +179,17 @@
                     success: function(response) {
                         if (response == 'Email id is already taken') {
                             email_state = false;
-                            $('#emailerror').text('sorry email already taken');
+                            $('#emailerror').text('**sorry email already taken');
+                            $('#emailerror').css({'color': 'red'})
+                            $('#email1').css({'border': '2px solid red'});
                             $('#signup').prop('disabled', true);
                             
-
-                        
-
-
                            
                         } else if (response == 'Its available') {
                             email_state = true; 
                             $('#emailerror').text('Email is available');
+                            $('#emailerror').css({'color':'green'});
+                            $('#email1').css({'border': '2px solid green'});
                             $('#signup').prop('disabled', false);
                             
                           
@@ -201,9 +223,13 @@ $('.user_id').keyup(function(e) {
             'username': username,
         },
         success: function(response) {
-            if (response == 'username id is already taken') {
+            console.log(response);
+            var username= $('.user_id').val()
+            if (response == 'username id is already taken' || username == "") {
                 user_state = false;
-                $('#usererror').text('sorry Username already taken');
+                $('#usererror').text('**sorry Username already taken');
+                $('#usererror').css({'color':'red'});
+                $('#u1').css({'border': '2px solid red'});
                 $('#signup').prop('disabled', true);
                 
 
@@ -213,7 +239,9 @@ $('.user_id').keyup(function(e) {
                
             } else if (response == 'Its available') {
                 user_state= true; 
-                $('#usererror').text('Username  is available');
+                $('.usernameclass').text('Username  is available');
+                $('#usererror').css({'color':'green'});
+                $('#u1').css({'border': '2px solid green'});
                 $('#signup').prop('disabled', false);
                 
               
@@ -232,12 +260,20 @@ $('.user_id').keyup(function(e) {
 
 
 
+<script>
+ 
+
+</script>
+
+
+
 
 
     <!-- JavaScript start-->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
     <!-- JavaScript Bundle with Popper -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!-- JavaScript End -->
 </body>

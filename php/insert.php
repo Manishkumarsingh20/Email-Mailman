@@ -1,5 +1,6 @@
 <?php
 include_once "db.php";
+session_start();
 $obj = new DB;
 if (isset($_POST['signup'])) {
     $firstname = $_POST["fname"];
@@ -26,7 +27,8 @@ if (isset($_POST['signup'])) {
     $query = "INSERT INTO users(firstname,lastname,username,picture,email,secondemail,password,cofirmpassword) Values('$firstname','$lastname','$username' ,'$file_name' ,'$emails', '$remails','$password' ,'$confirmpassword')";
     $m = 'abc';
     if ($obj->insertinto($query)) {
-
+        $_SESSION['status']=" Congratulations Registration Successfull";
+        $_SESSION['status_code']="success";
         $obj->url("../manmail/login.php?msg='$m'");
     }
 }
