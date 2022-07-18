@@ -3,7 +3,7 @@
 
 if (isset($_POST['reset_code'])) {
     $code = $_POST['reset_code'];
-    $conn = new mySqli('localhost', 'root', 'hestabit', 'mydata');
+    $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
     if ($conn->connect_error) {
         die('Could not connect to the database');
     }
@@ -19,6 +19,8 @@ if (isset($_POST['reset_code'])) {
         if ($new_reset_password == $new_password) {
             $changeQuery = $conn->query("UPDATE users SET password = '$new_reset_password', cofirmpassword = '$new_password' WHERE reset_code = '$code'");
             if ($changeQuery) {
+                // $_SESSION['forgot']="Password changed successfully";
+                // $_SESSION['forgot_code']="success";
                 echo "password updated successfully";
             } else {
                 echo "not updated";

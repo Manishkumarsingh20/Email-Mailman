@@ -9,8 +9,9 @@ if ($_SESSION['login']) {
 
     if (isset($_POST['changetonew'])) {
         $oldpassword = $_POST['oldpass'];
-        $newconfirmpassword = $_POST['new_password'];
         $confirm_passowrd_entery = $_POST['confirm_password'];
+        $newconfirmpassword = $_POST['new_password'];
+        
         $fetch_data = $obj->old_password_match($oldpassword, $confirm_passowrd_entery, $newconfirmpassword);
     }
 ?>
@@ -27,6 +28,8 @@ if ($_SESSION['login']) {
         <link rel="stylesheet" href="../css1/dashboard.css">
     </head>
 
+
+   
     <body>
         <nav class="navbar navbar-light bg-info p-3">
             <div class="col-12 col-md-3 col-lg-3 mb-2 flex-wrap flex-md-nowrap d-flex justify-content-between">
@@ -74,16 +77,19 @@ if ($_SESSION['login']) {
                                 <div class="col-sm-6">
 
                                     <div class="">
-                                        <input type="password" name="oldpass" class="form-control my-3 icon" placeholder="Type old password" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
+                                        <input type="password" name="oldpass" class="form-control my-3 icon" onchange=" return validation()" placeholder="Type old password" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
                                     </div>
                                     <div class="">
-                                        <input type="password" name="new_password" class="form-control my-3" placeholder="Type new password" id="cp1">
+                                        <input type="password"  name="confirm_password" class="form-control my-3" onchange=" return validation()"placeholder="Confirm password"id="cp1">
+                                        <span id="write" style="color:red"></span>
                                     </div>
                                     <div class="">
-                                        <input type="password" name="confirm_password" class="form-control my-3" placeholder="Confirm Password" id="cp1">
+                                        <input type="password"   name="new_password" class="form-control my-3" onchange=" return validation()"  placeholder="Type new password" id="newpassword">
+                                        
                                     </div>
+
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-outline-primary" style="padding:5px 5px 5px 5px ;width:94px" onclick="myvalidation()" name="changetonew">
+                                        <button type="submit" id="button" class="btn btn-outline-primary" style="padding:5px 5px 5px 5px ;width:94px" onclick="return validation()" name="changetonew">
                                             Submit</button>
                                     </div>
                                 </div>
@@ -104,6 +110,30 @@ if ($_SESSION['login']) {
     </body>
 
     </html>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <?php
+
+        if (isset($_SESSION['password']) && $_SESSION['password'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['password']  ?>",
+                    text: "Please press ok to go Back",
+                    icon: "<?php echo $_SESSION['password_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['password_code']);
+        }
+
+
+        ?>
+
 
 <?php
 } else {

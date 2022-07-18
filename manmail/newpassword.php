@@ -18,6 +18,7 @@ if(empty($_GET['code']) && !isset($_SESSION['id'])){
     <link rel="stylesheet" href="" class="css">
 </head>
 
+
 <body class="mt-5">
     <section class="Form my-4 mx-5">
         <div class="container">
@@ -31,13 +32,14 @@ if(empty($_GET['code']) && !isset($_SESSION['id'])){
                                 <div class="">
                                     <input type="hidden" name="reset_code" value="<?php echo $_GET['code']; ?>">
 
-                                    <input type="password" name="npass" class="form-control my-3 icon" placeholder="Enter New Password Here" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
+                                    <input type="password" name="npass" class="form-control my-3 icon" onchange="return validation()" placeholder="Enter New Password Here" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
                                 </div>
                                 <div class="">
-                                    <input type="password" name="new_password" class="form-control my-3" placeholder="Confirm Password" id="cp1">
+                                    <input type="password" name="new_password" class="form-control my-3" onchange=" return validation()" placeholder="Confirm Password" id="cp1">
+                                <span id="write" style="color:red"></span>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-outline-primary" onclick="myvalidation()" name="change">
+                                    <button type="submit"  id="button" class="btn btn-outline-primary" onclick=" return validation()" name="change">
                                         Submit</button>
                                 </div>
                                 <!-- <div id="write"></div> -->
@@ -51,12 +53,14 @@ if(empty($_GET['code']) && !isset($_SESSION['id'])){
             </div>
         </div>
     </section>
+
+    <script src="../js1/changepassword.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../js1/newpassword.js"></script>
+    
 </body>
 
 </html>
-<?php
+ <?php
 
-?>
+?> 

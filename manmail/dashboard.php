@@ -36,6 +36,14 @@ if ($_SESSION['login']) {
         $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
     }
 
+    if (isset($_POST["submit"]) && $_POST["submit"] != "") {
+        $email = $_SESSION['email'];
+        $message_id = $_POST['message_id'];
+        // print($email);
+        $result = $obj->inbox_delete_data($email,$message_id);
+    }
+    
+
     
 ?>
 
@@ -132,6 +140,7 @@ if ($_SESSION['login']) {
                 </nav>
 
                 <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
+                <form name="frmUser" method="post">
                     <div class="row actio_bar m-4">
                         <div>
 
@@ -155,84 +164,33 @@ if ($_SESSION['login']) {
                                 <h5 class="card-header">Inbox</h5>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                    <table class="table">
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
+                                                <?php
+                                                $sql = $obj->inbox_data($_SESSION['email']);
+                                             
 
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
-
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
-
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id="checkbox" onclick="checkbox()"></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
-
-
-                                                </tr>
+                                                while ($row = mysqli_fetch_array($sql)) {
+                                                ?>
+                                                 
+                                                      <tr >
+                                                        <td><input type="checkbox" name="" ></td>
+                                                        <input type="hidden" name="message_id[]" id="message_id" value="<?php  echo $row['id'];?>">
+                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send']?></td>
+                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line']?></td>
+                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time']?></td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
 
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
-
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
-                                                    <td>Sender@mail.com</td>
-                                                    <td>Mailing Subject</td>
-                                                    <td>DD/MM/YY</td>
-
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
 
                             </div>
+                                            </form>
                 </main>
             </div>
         </div>
@@ -316,6 +274,65 @@ if ($_SESSION['login']) {
             </div>
         </div>
 
+
+        </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php
+
+if(isset($_SESSION['Compose']) && $_SESSION['Compose'] !='')
+{
+
+    ?>
+
+<script>swal({
+  title: "<?php echo $_SESSION['Compose']  ?>",
+  text: "",
+  icon: "<?php echo $_SESSION['compose_code']  ?>",
+  button: "Ok Done",
+}); 
+</script>
+    <?php
+unset($_SESSION['Compose']);
+
+}
+
+
+?>
+
+
+
+</script>
+    
+<?php
+
+if(isset($_SESSION['draft']) && $_SESSION['draft'] !='')
+{
+
+    ?>
+
+<script>swal({
+  title: "<?php echo $_SESSION['draft']  ?>",
+  text: "",
+  icon: "<?php echo $_SESSION['draft_code']  ?>",
+  button: "Ok Done",
+}); 
+</script>
+    <?php
+unset($_SESSION['draft']);
+
+}
+
+
+?>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="../js1/compose.js"></script>
         <!-- <script src="/js1/showhide.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

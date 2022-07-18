@@ -14,7 +14,13 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../css1/login.css">
 </head>
+<style>
+ #login{
+    color:red;
+    font-size:13px;
+ }
 
+</style>
 <body class="mt-5">
     <section class="Form my-4 mx-5">
         <div class="container">
@@ -30,13 +36,14 @@ session_start();
                         <div class="form-row">
                             <div class="">
                                 <label>Email</label>
-                                <input type="text" class="form-control myy-3" onchange="return myvalidation()" name="username" placeholder="Email/Username" id="remail1">
-
+                                <input type="text" class="form-control myy-3" onchange="return myvalidation()"   name="username" placeholder="Email/Username" id="remail1">
+                                <span id="login"><?php echo  $_SESSION['login'] ?></span>
                         </div>
                         <div class="form-row">
                             <div class="">
                                 <label>Password</label>
-                                <input type="password" class="form-control my-3"onchange="return myvalidation()" name="password" placeholder="Enter Password" id="cp1">
+                                <input type="password"  class="form-control my-3" onchange="return myvalidation()"   name="password" placeholder="Enter Password" id="cp1">
+                                <span id="passwordmatch"></span>
                             </div>
 
                         </div>
@@ -56,6 +63,11 @@ session_start();
         </div>
     </section>
 
+</script>
+
+
+
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
 
@@ -66,7 +78,7 @@ if(isset($_SESSION['status']) && $_SESSION['status'] !='')
 
 <script>swal({
   title: "<?php echo $_SESSION['status']  ?>",
-  text: "Please press ok to login!",
+  text: "Please press ok to go to login Page!",
   icon: "<?php echo $_SESSION['status_code']  ?>",
   button: "Ok Done",
 }); 

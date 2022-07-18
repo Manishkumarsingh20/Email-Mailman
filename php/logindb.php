@@ -1,6 +1,7 @@
 
 
 <?php
+session_start();
 
 class Databases
 {
@@ -8,7 +9,7 @@ class Databases
      public $error;
      public function __construct()
      {
-          $this->con = mysqli_connect("localhost", "root", "hestabit", "mydata");
+          $this->con = mysqli_connect("localhost", "tse", "bPmtHasjyTJ2SgZJ", "manish");
           if (!$this->con) {
                echo 'Database Connection Error ' . mysqli_connect_error($this->con);
           }
@@ -36,11 +37,14 @@ class Databases
                $_SESSION['secondemail'] = $user_data['secondemail'];
                $_SESSION['email'] = $user_data['email'];
                
+               
 
                header('location:../manmail/dashboard.php');
                return  true;
           } else {
-
+               
+               $_SESSION['login']="Could't find your Mailman Account//please check your Username/Email or password";
+               
                return header('location:../manmail/login.php');
                false;
           }
