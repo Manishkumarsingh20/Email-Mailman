@@ -101,7 +101,7 @@ if ($_SESSION['login']) {
                                 </div>
                                 <div class="form-row">
                                     <div class="">
-                                        Recovery Email: <input type="email" value="<?php echo $_SESSION['secondemail'] ?>" onchange="return validationstart()" name="recoveryemail" class="form-control my-3" placeholder="Email" id="remail">
+                                        Recovery Email: <input type="text" value="<?php echo $_SESSION['secondemail'] ?>" onchange="return validationstart()" name="recoveryemail" class="form-control my-3" placeholder="Email" id="remail">
                                     </div>
                                 </div>
                                 <div class="form-row d-flex justify-content-between">
@@ -115,7 +115,7 @@ if ($_SESSION['login']) {
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
                                     <input type="file" class="type" name="picture">
-                                    <img src="../images/<?php echo $_SESSION['picture'] ?>"alt="" class="" style="width:300px">
+                                    <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
 
                                 </div>
                             </div>
@@ -124,6 +124,55 @@ if ($_SESSION['login']) {
                 </div>
             </div>
         </section>
+
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <?php
+
+        if (isset($_SESSION['update']) && $_SESSION['update'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['update']  ?>",
+                    text: "Please press ok to go Back",
+                    icon: "<?php echo $_SESSION['update_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['update']);
+        }
+
+
+        ?>
+
+
+        <?php
+
+        if (isset($_SESSION['delete']) && $_SESSION['delete'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['delete']  ?>",
+                    text: "Please press ok to go Back",
+                    icon: "<?php echo $_SESSION['delete_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['delete']);
+        }
+
+
+        ?>
+
+
+
+
         <script src="../js1/profileupload.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>

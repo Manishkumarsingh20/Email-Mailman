@@ -266,6 +266,13 @@ input[type='file'] {
     margin: 0px 0px 0px 56px;
 }
 
+
+#usererror{
+    position: relative;
+    left:1px;
+
+
+}
 /* meadia query */
 
 /* mobile device */
@@ -366,7 +373,11 @@ input[type='file'] {
 
     .CB {
 
-        margin: 13px 0px 0px 200px;
+        color: rgb(11, 70, 230);
+    position: relative !important;
+    top: 6px !important ;
+    left: -186px !important;
+    font-size: 15px !important;
 
     }
 
@@ -374,16 +385,18 @@ input[type='file'] {
 
         width: 120px;
         height: 87px;
+        left: 223px;
+    top: 144px;
 
     }
 
     input[type='file'] {
 
         cursor: pointer;
-        position: relative;
-        top: -94px;
-        left: -65px;
         width: 101px;
+        position: relative !important;
+        top: -329px  !important;
+        left: 61px  !important;
 
     }
 
@@ -417,12 +430,11 @@ input[type='file'] {
     }
 
     .upload img {
-
         width: 88px;
         height: 61px;
-        position: relative;
-        left: 2px;
-        top: 17px;
+        position: relative !important;
+        left: 223px !important;
+        top: 144px !important;
 
     }
 
@@ -434,6 +446,12 @@ input[type='file'] {
         left: 21px;
 
     }
+    .login h2 {
+        color: blue;
+        position: relative;
+        top: 0px;
+        left: 209px;
+}
 }
 
 /* Low Resolution Tablets and ipads  */
@@ -455,11 +473,8 @@ input[type='file'] {
     .container {
 
         overflow: hidden;
-
-
-        position: absolute;
-        top: 0px;
-        left: 0px;
+        position: absolute !important;
+        right: 0px !important;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -474,7 +489,7 @@ input[type='file'] {
     input[type='file'] {
         cursor: pointer;
         position: relative;
-        top: 149px;
+        top: -482px;
         left: 159px;
     }
 
@@ -535,23 +550,24 @@ input[type='file'] {
 
     .form1 input[type="checkbox"] {
         width: 550px;
-        margin: 0px 0px 0px 41px;
+        margin: 0px 0px 0px 56px;
     }
 
     .CB {
 
-        margin: 13px 0px 0px 200px;
+        color: rgb(11, 70, 230);
+    position: relative;
+    top: 7px;
+    left: -175px;
+    font-size: 15px;
 
 
     }
 
 
     .create {
-        position: absolute;
-        top: 81px;
-        left: 141px;
-        width: 194px;
-        color: white;
+        color: #141619;
+        margin: 28px 0px 0px -226px;
     }
 
     .btn {
@@ -573,12 +589,47 @@ input[type='file'] {
 
 
     .upload img {
-        width: 88px;
-        height: 61px;
+        width: 129px;
+        height: 112px;
         position: relative;
-        left: 2px;
-        top: 17px;
+        left: -37px;
+        top: -33px;
     }
+
+    #error {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #lasterror {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #usererror {
+        margin: 0px 335px 0px -26px !important;
+    }
+
+    #emailerror {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #recover {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #passwordd {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #confirmpasswordd {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #pictures {
+        margin: -51px 345px 0px -18px !important;
+        font-weight: 10px;
+        font-size: 13px;
+    }
+    
 
 
     .btn1 {
@@ -587,6 +638,12 @@ input[type='file'] {
 
         top: 620px;
         left: 21px;
+    }
+    .login h2 {
+        color: blue;
+        position: relative;
+        top: 0px;
+        left: 312px;
     }
 }
 
@@ -613,6 +670,10 @@ input[type='file'] {
 
 
 
+    .create{
+        color:black;
+    }
+
     #write {
         margin: 0px 0px 0px 106px;
     }
@@ -637,11 +698,12 @@ input[type='file'] {
     }
 
     .upload img {
-        width: 108px;
-        height: 85px;
-        position: relative;
-        left: 136px;
-        top: 194px;
+        width: 155px !important;
+        height: 134px !important;
+        position: relative !important;
+        left: 2px !important;
+        top: -46px !important ;
+        margin: 136px 0px 0px 145px;
     }
 
     .form1 input[type="text"] {
@@ -651,12 +713,13 @@ input[type='file'] {
 
     }
 
+
     .create {
         position: absolute;
         top: 81px;
-        left: 141px;
+        left: -4px !important;
         width: 194px;
-        color: #09090a;
+        color: #09090a !important;
     }
 
     .form1 input[type="password"] {
@@ -688,21 +751,22 @@ input[type='file'] {
 
     .login h2 {
         color: blue;
-        position: relative;
-        top: 25px;
-        left: -38px;
-        display: none;
+    position: relative;
+    top: 25px;
+    left: 74px;
+    
     }
 
 
     .form1 input[type="checkbox"] {
         width: 550px;
-        margin: 0px 0px 0px 41px;
+        margin: 0px 0px 0px 49px;
     }
 
     .CB {
 
-        margin: 13px 0px 0px 200px;
+        position: relative;
+         left: -184px;
 
 
     }
@@ -749,5 +813,44 @@ input[type='file'] {
 
         top: 620px;
         left: 21px;
+    }
+    #error {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #lasterror {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #usererror {
+        margin: 0px 335px 0px -26px !important;
+    }
+
+    #emailerror {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #recover {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #passwordd {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #confirmpasswordd {
+        margin: 0px 335px 0px -47px !important;
+    }
+
+    #pictures {
+            margin: -73px 343px 0px 5px !important;
+    }
+    .container {
+
+        overflow: hidden;
+        position: absolute !important;
+        right: 0px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }

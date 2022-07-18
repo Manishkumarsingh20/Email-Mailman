@@ -3,6 +3,41 @@
 include_once "../php/dbconnect.php";
 session_start();
 $obj = new dbconnection;
+if (isset($_POST["submit"]) && $_POST["submit"] != "") {
+    $email = $_SESSION['email'];
+    $message_id = $_POST['message_id'];
+    // print($email);
+    $result = $obj->inbox_delete_data($email,$message_id);
+}
+
+if (isset($_POST['compose_msg_send'])) {
+       
+    $to = $_POST['to'];
+    $from = $_SESSION['email'];
+    $subject = $_POST['subject'];
+    $cc = $_POST['cc'];
+    $bcc = $_POST['bcc'];
+    $message = $_POST['message'];
+    $attachement = $_FILES['pictures']['name'];
+    $name_image_temp = $_FILES['pictures']['tmp_name'];
+    move_uploaded_file($name_image_temp, "../images/" . $attachement);
+    $query_insert = $obj->insert_compose($to, $from, $subject, $cc, $bcc, $message, $attachement);
+}
+
+if (isset($_POST['draft'])) {
+    //   echo "<pre>"; 
+    //     print_r(($_POST)); die("kk");
+        $to = $_POST['to'];
+        $from = $_SESSION['email'];
+        $subject = $_POST['subject'];
+        $cc = $_POST['cc'];
+        $bcc = $_POST['bcc'];
+        $message = $_POST['message'];
+        $attachement = $_FILES['pictures']['name'];
+        $name_image_temp = $_FILES['pictures']['tmp_name'];
+        move_uploaded_file($name_image_temp, "../images/" . $attachement);
+        $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
+    }
 if ($_SESSION['login']) {
 
 ?>
@@ -66,9 +101,8 @@ if ($_SESSION['login']) {
                     <div class="position-sticky">
                         <ul class="nav flex-column">
 
-                            <li class="compose">
-
-                                <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="staticBackdrop">Compose</button>
+                        <li class="compose">
+                                <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a href="dashboard.php?composeid=<?php echo $_SESSION['id'] ?>">Compose</a></button>
                             </li>
 
                             <li class="nav-item mt-2">
@@ -104,9 +138,8 @@ if ($_SESSION['login']) {
 
 
                             <span class="mr-2">
-                                <input type="checkbox" name="" title="select all" >
-                                <button style="display: none;padding: 4px 11px 3px 14px;margin: -26px 30px 0px 49px; position: absolute;right: 1086px;" class="btn btn-outline-primary" id="hide"style="padding: 5px 9px 9px 6px " type="button">Delete</button>
-                                 
+                            <input type="checkbox" name="" title="select all">
+                                    <input name="submit" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;" class="btn btn-outline-primary" id="hide" style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
                         </div>
                         </span>
                         <div class="d-grid gap-2 d-md-block">
@@ -122,9 +155,10 @@ if ($_SESSION['login']) {
                                             <tbody>
                                             <?php
                                                 $sql = $obj->trash($_SESSION['email']);
+                                                
 
                                                 while ($row = mysqli_fetch_assoc($sql)) {
-                                                    $_SESSION['id'] = $row['id'];
+                                                    
                                                 ?>
                                                     <tr>
                                                         <td>
@@ -138,9 +172,10 @@ if ($_SESSION['login']) {
                                                 <?php
                                                 }
                                                 ?>
+                                          
+                                           
                                                   </tbody>
                                         </table>
-                                               
                                     </div>
                                 </div>
                             </div>
@@ -162,6 +197,7 @@ if ($_SESSION['login']) {
             </ul>
         </nav>
         <!-- Modal -->
+        <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -170,40 +206,116 @@ if ($_SESSION['login']) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+
+
+
                         <section class="form">
+
+
                             <div class="container-fluid py-2 mt-5">
-                                <form class="form1">
+
+
+
+                                <form class="form1" method="post" enctype='multipart/form-data'>
+
+
                                     <div class="py-2">
-                                        <input type="email" class="form-control" placeholder="Email-Address">
+
+                                        <input type="email" name="to" id="email" onchange="return validation()" class="form-control" placeholder="Enter you email">
                                     </div>
+
                                     <div class="py-2">
-                                        <input type="text" class="form-control" placeholder="CC">
+
+                                        <input type="text" name="subject" id="sub" onchange="return validation()" class="form-control" placeholder="Subject">
+                                    </div>
+
+                                    <div class="py-2">
+                                        <input type="text" name="cc" class="form-control" placeholder="CC">
                                     </div>
 
                                     <div class=" py-2">
-                                        <input type="text" class="form-control" placeholder="BCC">
+                                        <input type="text" name="bcc" class="form-control" placeholder="BCC">
                                     </div>
+
+
                                     <div class="py-2">
-                                        <textarea class="form-control" placeholder="Message body" name="" id="" cols="100" rows="10"></textarea>
+
+                                        <textarea class="form-control" name="message" onchange="return validation()" placeholder="Message body" name="" id="" cols="100" rows="10"></textarea>
                                     </div>
                                     </fieldset>
-                                </form>
+
+
+
                             </div>
                         </section>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send</button>
+                        <input type="file" name="pictures">
+                        <button type="submit" class="btn btn-secondary" name="draft" value="close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit"  onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
 
+        </script>
 
 
 
-        <!-- <script src="/js1/showhide.js"></script> -->
-        <script src="../js1/checkbox.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php
+
+if(isset($_SESSION['Compose']) && $_SESSION['Compose'] !='')
+{
+
+?>
+
+<script>swal({
+title: "<?php echo $_SESSION['Compose']  ?>",
+text: "",
+icon: "<?php echo $_SESSION['compose_code']  ?>",
+button: "Ok Done",
+}); 
+</script>
+<?php
+unset($_SESSION['Compose']);
+
+}
+
+
+?>
+
+</script>
+    
+<?php
+
+if(isset($_SESSION['draft']) && $_SESSION['draft'] !='')
+{
+
+    ?>
+
+<script>swal({
+  title: "<?php echo $_SESSION['draft']  ?>",
+  text: "",
+  icon: "<?php echo $_SESSION['draft_code']  ?>",
+  button: "Ok Done",
+}); 
+</script>
+    <?php
+unset($_SESSION['draft']);
+
+}
+
+
+?>
+
+       
+
+
+
+        <script src="../js1/compose.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 

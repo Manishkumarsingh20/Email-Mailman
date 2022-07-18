@@ -37,20 +37,4 @@ function validation(){
         validate2.style.border="2px solid red";
 
      }
-
-     var newpasswords=document.getElementById("newpassword").value;
-     var  confirmpasswordss=document.getElementById("newpassword");
-     var confirmregexx=/^[a-zA-Z0-9!@#$%^&*]+$/;
-     if(newpasswords.match(confirmregexx)){
-        confirmpasswordss.style.border="2px solid green";
-        
-     }else{
-        confirmpasswordss.style.border="2px solid red";
-        return false;
-        
-     }
-
-
-
-}
-
+    }

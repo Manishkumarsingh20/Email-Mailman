@@ -3,9 +3,9 @@ session_start();
 
 class dbconnection
 {
-    protected $db_name = 'mydata';
-    protected $db_user = 'root';
-    protected $db_pass = 'hestabit';
+    protected $db_name = 'manish';
+    protected $db_user = 'tse';
+    protected $db_pass = 'bPmtHasjyTJ2SgZJ';
     protected $db_host = 'localhost';
     public $connect_db;
 
@@ -63,9 +63,10 @@ class dbconnection
             $_SESSION['lastname'] = $lastname;
             $_SESSION['secondemail'] = $secondemail;
             $_SESSION['picture'] = $picture;
-            echo '<script language="javascript">';
-            echo 'alert("updated successfully")';
-            echo '</script>';
+            
+
+            $_SESSION['update']="Profile Uploaded Successful";
+            $_SESSION['update_code']="success";
         } else {
             return " not updated";
         }
@@ -74,19 +75,20 @@ class dbconnection
     public function old_password_match($oldpassword, $confirm_passowrd_entery, $newconfirmpassword)
     {
         $id = $_GET['changeoldpasswordid'];
-
-        $query = "SELECT password ,cofirmpassword,picture FROM users WHERE id='$id'";
+        $oldpassword=$oldpassword;
+        $query = "SELECT password ,cofirmpassword,picture FROM users WHERE id='$id' AND password='$oldpassword'";
         $mysqli_query = $this->connect_db->query($query);
         $fetch_data = $mysqli_query->fetch_assoc();
         if ($oldpassword == $confirm_passowrd_entery) {
             $changeQuery = $this->connect_db->query("UPDATE users SET password ='$newconfirmpassword', cofirmpassword='$newconfirmpassword' WHERE id = '$id'");
 
             if ($changeQuery) {
-                echo '<script language="javascript">';
-                echo 'alert("updated successfully")';
-                echo '</script>';
+                
+                $_SESSION['password']="Password Change Successfully";
+            $_SESSION['password_code']="success";
             } else {
                 echo "not updated";
+               
             }
         }
     }
@@ -98,10 +100,10 @@ class dbconnection
         $query = "UPDATE users SET picture='' WHERE id='$id'";
         $sql = $this->connect_db->query($query);
         if ($sql) {
-            echo '<script language="javascript">';
-            echo 'alert("Deleted successfully")';
-            echo '</script>';
+            $_SESSION['delete']="Profile photo deleted successfully";
+            $_SESSION['delete_code']="success";
             $_SESSION['picture'] = $picture;
+
         } else
             echo "not deleted";
     }
@@ -115,9 +117,8 @@ class dbconnection
 
         $query_insert = $this->connect_db->query($sql_query);
         if ($query_insert) {
-            echo '<script language="javascript">';
-            echo 'alert("Message Sended successfully")';
-            echo '</script>';
+            $_SESSION['Compose']="Message Send successfully";
+            $_SESSION['compose_code']="success";
         } else {
             echo "not inserted";
         }
@@ -159,7 +160,7 @@ class dbconnection
 
          public function inbox_delete_data($email,$message_id){
           foreach($message_id as $deleteid){
-           $sql="UPDATE email SET todelete=1 WHERE to_send = '$email' && id = '$deleteid'";
+           $sql="UPDATE email SET todelete=1 WHERE to_send = '$email' AND id = '$deleteid'";
           $result = $this->connect_db->query($sql);
        }
        if($result){
@@ -181,9 +182,8 @@ public function insert_draft($to, $from, $subject, $cc, $bcc, $message, $attache
 
     $query_insert = $this->connect_db->query($sql_query);
     if ($query_insert) {
-        echo '<script language="javascript">';
-        echo 'alert("message saved successfully")';
-        echo '</script>';
+        $_SESSION['draft']="Message saved in draft successfully";
+        $_SESSION['draft_code']="success";
     } else {
         echo "not inserted";
     }
@@ -191,22 +191,24 @@ public function insert_draft($to, $from, $subject, $cc, $bcc, $message, $attache
 
 public function draft($email)
 {
-    $query = "SELECT * from email WHERE from_send='$email' and draft =1";
+    $query = "SELECT * from email WHERE from_send='$email' AND draft =1";
     $result = $this->connect_db->query($query);
     return $result;
 }
 
 public function trash($email){
 
-$sql="SELECT * FROM email WHERE from_send='$email' AND todelete=1 AND fromdelete=1";
+$sql="SELECT * FROM email WHERE to_send='$email' AND fromdelete=1";
 $result=$this->connect_db->query($sql);
+
 return $result;
 }
 
 
+
 public function email_alreadyexsist($email){
     $email=$_POST['email'];
-    $sql="SELECT email FROM users WHERE email='$email'";
+    $sql="SELECT email FROM users WHERE email='$email' ";
     $result=$this->connect_db->query($sql);
     if(mysqli_num_rows($result)>0){
         echo json_encode("Email id is already taken");
@@ -226,6 +228,9 @@ public function username_already($username){
     }
 }
 
+
+
+
 }
 
 
@@ -236,4 +241,5 @@ if(isset($_POST['check_Emailbtn']) && !empty($_POST['check_Emailbtn'])){
 if(isset($_POST['check_userbtn']) && !empty($_POST['check_userbtn'])){
     $obj->username_already($_POST['check_userbtn']);
 }
-// print_r($_POST); die(" gg ");
+
+
