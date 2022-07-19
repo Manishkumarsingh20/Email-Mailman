@@ -43,14 +43,11 @@ if ($to_mail != '') {
     if ($verifyQuery->num_rows > 0) {
         $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
         $reset = $conn->query($reset_codes);
-        echo 'Message has been sent, check your email';
 
         $mail = new PHPMailer(true);
-
         try {
 
             $mail->send();
-
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
@@ -58,12 +55,9 @@ if ($to_mail != '') {
             $mail->Password   = 'zyfhcwesddjwkeif';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
-
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-            $to_mail = $to_mail;
-            $mail->addAddress($email);
+            $mail->addAddress($to_mail);
             $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
-
 
 
             $mail->isHTML(true);
