@@ -23,7 +23,7 @@
                     <div class="col-9">
                         <label class="my-2">Enter Your Registered Email</label>
 
-                        <input type="text" name="email" value="username" class="form-control" placeholder="abc@.com"  onchange=" return validation()"id="emailconfirm">
+                        <input type="text" name="email" class="form-control" placeholder="abc@.com"  onchange=" return validation()"id="emailconfirm">
                         <h6 class="my-2"><a href="login.php">Back to login</a></h6>
                         <button type="submit"  id="button"class="btn btn-outline-primary" name="reset" onclick=" return validation()">Sent Mail</button>
                     </div>
