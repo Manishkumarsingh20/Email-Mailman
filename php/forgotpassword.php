@@ -46,7 +46,7 @@ if ($to_mail != '') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-            $mail->addAddress('vijaypalg71@gmail.com');
+            $mail->addAddress('vijaypalg71@gmail.com','vijay');
             $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
