@@ -28,8 +28,8 @@ try {
     
    
     $verifyQuery = $conn->query("SELECT * FROM users WHERE (username='$second_email' OR email='$second_email'");
-   echo  $fetch_data=mysqli_fetch_assoc($verifyQuery );
-   die();
+   $fetch_data=mysqli_fetch_assoc($verifyQuery );
+   
    
      
     $recoverymail = $fetch_data['secondemail'];
