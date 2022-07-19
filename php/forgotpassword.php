@@ -56,10 +56,11 @@ if ($to_mail != '') {
  $mail->isHTML(true);                                  // Set email format to HTML
  $mail->Subject = 'Password Reset';
  $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
-
+ $mail->send();
  echo "success please check your $to_mail";
- $conn->close();
+ 
 } catch (Exception $e) {
+
  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 }
