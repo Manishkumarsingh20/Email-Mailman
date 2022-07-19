@@ -26,7 +26,7 @@ try {
     }
 
     
-   echo $sql="SELECT * FROM users WHERE (username='$second_email' OR email='$second_email'";
+   echo $sql="SELECT * FROM users WHERE username='$second_email' OR email='$second_email'";
    die();
      $verifyQuery = $conn->query($sql);
     
