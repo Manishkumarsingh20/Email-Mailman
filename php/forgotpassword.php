@@ -33,6 +33,7 @@ if ($to_mail != '') {
     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
+    $mail->send();
 
     if ($verifyQuery->num_rows > 0) {
 
@@ -56,7 +57,7 @@ if ($to_mail != '') {
  $mail->isHTML(true);                                  // Set email format to HTML
  $mail->Subject = 'Password Reset';
  $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
- $mail->send();
+
  echo "success please check your $to_mail";
  
 } catch (Exception $e) {
