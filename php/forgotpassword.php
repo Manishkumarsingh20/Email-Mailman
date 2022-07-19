@@ -1,6 +1,5 @@
 <?php
 
-echo 'sdklf';
 
 if (isset($_POST['reset'])) {
     $second_email = $_POST['email'];
@@ -77,3 +76,4 @@ if ($verifyQuery->num_rows > 0) {
     echo 'username or email not found';
 }
 $conn->close();
+}
