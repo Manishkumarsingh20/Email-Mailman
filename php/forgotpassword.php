@@ -62,10 +62,10 @@
 
 
 
-<?php
 
 
-// if (isset($_POST['reset'])) {
+
+<!-- // if (isset($_POST['reset'])) {
 //     $second_email = $_POST['email'];
 // } else {
 //     exit();
@@ -134,4 +134,4 @@
 // echo 'username or email not found';
 // }
 
-
+ -->
