@@ -1,7 +1,7 @@
 
 <?php
     if(isset($_POST['reset'])) {
-        $secondmail = $_POST['email'];
+        $email = $_POST['email'];
     }
     else {
         exit();
