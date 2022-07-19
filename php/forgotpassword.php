@@ -26,9 +26,10 @@ try {
     }
 
     
-   
-    echo $verifyQuery = $conn->query("SELECT * FROM users WHERE (username='$second_email' OR email='$second_email'");
-    die();
+   echo $sql="SELECT * FROM users WHERE (username='$second_email' OR email='$second_email'";
+   die();
+     $verifyQuery = $conn->query($sql);
+    
    $fetch_data=mysqli_fetch_assoc($verifyQuery );
    
    
