@@ -1,8 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 if (isset($_POST['reset'])) {
     $second_email = $_POST['email'];
 } else {
@@ -32,17 +30,21 @@ $fetch_data = mysqli_fetch_assoc($verifyQuery);
 
 
 $recoverymail = $fetch_data['secondemail'];
-echo $recoverymail;
-die;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb9e607e80b156d70db37abc9d381a7fa4f4aeb6
 echo $to_mail = $recoverymail;
 die();
 
 if ($verifyQuery->num_rows > 0) {
+<<<<<<< HEAD
 =======
 if ($recoverymail != '') {
 >>>>>>> 9171de52958007deb9f22b096d52343c750c3c11
+=======
+>>>>>>> eb9e607e80b156d70db37abc9d381a7fa4f4aeb6
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
 
