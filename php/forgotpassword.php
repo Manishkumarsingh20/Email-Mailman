@@ -1,7 +1,7 @@
 
 <?php
     if(isset($_POST['reset'])) {
-        $email = $_POST['email'];
+        $secondmail = $_POST['email'];
     }
     else {
         exit();
@@ -30,7 +30,7 @@
     
         //Recipients
         $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-        $mail->addAddress($email);     // Add a recipient
+        $mail->addAddress($secondmail);     // Add a recipient
 
         $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,10);
     
@@ -45,10 +45,10 @@
             die('Could not connect to the database.');
         }
 
-        $verifyQuery = $conn->query("SELECT * FROM users WHERE secondemail='$email' ");
+        $verifyQuery = $conn->query("SELECT * FROM users WHERE (username='$secondmail' OR  email='$secondmail')");
 
         if($verifyQuery->num_rows) {
-            $reset_codes = $conn->query("UPDATE users SET reset_code = '$code' WHERE secondemail='$email'");
+            $reset_codes = $conn->query("UPDATE users SET reset_code = '$code' WHERE (username='$secondmail' OR  email='$secondmail')");
                 
                 
             $mail->send();
