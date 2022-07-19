@@ -29,7 +29,8 @@
     
         //Recipients
         $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-            $mail->addAddress($to_mail);   // Add a recipient
+        echo $second_email;
+            $mail->addAddress($second_email);   // Add a recipient
 
         $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,10);
     
