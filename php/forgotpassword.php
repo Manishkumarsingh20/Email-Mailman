@@ -25,10 +25,12 @@ $sql = "SELECT * FROM users WHERE username='$second_email' OR email='$second_ema
 
 $verifyQuery = $conn->query($sql);
 
-$fetch_data = mysqli_fetch_assoc($verifyQuery);
 
+$fetch_data = mysqli_fetch_assoc($verifyQuery);
+echo '<pre>';
+print_r($fetch_data);
 echo $to_mail = $recoverymail;
-die();
+die('die');
 
 if ($recoverymail != '') {
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
