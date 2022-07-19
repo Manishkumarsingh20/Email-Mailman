@@ -30,6 +30,8 @@ $fetch_data = mysqli_fetch_assoc($verifyQuery);
 
 
 $recoverymail = $fetch_data['secondemail'];
+echo $recoverymail;
+die;
 
 if ($recoverymail != '') {
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
