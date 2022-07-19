@@ -17,8 +17,11 @@ if (isset($_POST['reset_code'])) {
         $new_reset_password = $_POST['npass'];
         $new_password = $_POST['new_password'];
         if ($new_reset_password == $new_password) {
-             echo $changeQuery = $conn->query("UPDATE users SET password = '$new_reset_password', cofirmpassword = '$new_password' WHERE reset_code = '$code'");
-            if ($changeQuery) {
+            echo $query = "UPDATE users SET password = '$new_reset_password', cofirmpassword = '$new_password' WHERE reset_code = '$code'";
+            die;
+            $changeQuery = $conn->query($query);
+           
+             if ($changeQuery) {
                 // $_SESSION['forgot']="Password changed successfully";
                 // $_SESSION['forgot_code']="success";
                 echo "password updated successfully";
