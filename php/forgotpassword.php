@@ -45,10 +45,10 @@
             die('Could not connect to the database.');
         }
 
-        $verifyQuery = $conn->query("SELECT * FROM users WHERE secondemail='$email' ");
+        $verifyQuery = $conn->query("SELECT * FROM users WHERE username='$email' ");
 
         if($verifyQuery->num_rows) {
-            $reset_codes = $conn->query("UPDATE users SET reset_code = '$code' WHERE secondemail='$email'");
+            $reset_codes = $conn->query("UPDATE users SET reset_code = '$code' WHERE username='$email'");
                 
                 
             $mail->send();
