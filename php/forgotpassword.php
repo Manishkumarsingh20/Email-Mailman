@@ -27,10 +27,8 @@ $verifyQuery = $conn->query($sql);
 
 
 $fetch_data = mysqli_fetch_assoc($verifyQuery);
-echo '<pre>';
-print_r($fetch_data);
-echo $to_mail = $recoverymail;
-die('die');
+
+$to_mail = $recoverymail['secondemail'];
 
 if ($recoverymail != '') {
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
@@ -62,7 +60,7 @@ if ($verifyQuery->num_rows > 0) {
         $mail->Port       = 465;
 
         $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-        $to_mail = $recoverymail;
+        $to_mail = $to_mail;
         $mail->addAddress($email);
         $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
