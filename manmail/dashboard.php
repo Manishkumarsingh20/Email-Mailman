@@ -58,7 +58,7 @@ if ($_SESSION['login']) {
         <!-- <link rel="stylesheet" href="../css1/emailpage.css"> -->
         <link rel="stylesheet" href="../css1/dashboard.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -76,8 +76,8 @@ if ($_SESSION['login']) {
             <div class="col-lg-6 col-md-6 col-6">
                 <form method="post">
                 <div class="input-group">
-                    <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" name="submit" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button>
+                    <input type="search" id= "searchdata"name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                  
                 </div>
 </form>
             </div>
@@ -158,13 +158,14 @@ if ($_SESSION['login']) {
 
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" class="removetable">
                         <div class="col-12 mb-3">
                             <div class="card">
                                 <h5 class="card-header">Inbox</h5>
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                    <table class="table">
+                                    <div class="table-responsive removable-table">
+                                    <table class="table" id="removetable">
+                                    <div id="pagination" ></div>
                                             <tbody>
                                                 <?php
                                                 $sql = $obj->inbox_data($_SESSION['email']);
@@ -176,7 +177,7 @@ if ($_SESSION['login']) {
                                                       <tr >
                                                         <td><input type="checkbox" name="" ></td>
                                                         <input type="hidden" name="message_id[]" id="message_id" value="<?php  echo $row['id'];?>">
-                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send']?></td>
+                                                        <td  id="#table-data"onclick="window.location='sentdetail.php';"><?php echo $row['from_send']?></td>
                                                         <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line']?></td>
                                                         <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time']?></td>
                                                     </tr>
@@ -194,23 +195,7 @@ if ($_SESSION['login']) {
                 </main>
             </div>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-
-
-
-
+       
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -275,6 +260,31 @@ if ($_SESSION['login']) {
         </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
@@ -327,18 +337,91 @@ unset($_SESSION['draft']);
 
 
 
+        <script>
+
+$(document).ready(function() {
+
+
+$('#searchdata').keyup(function(e) {
+    e.preventDefault();
+    var search = $('#searchdata').val();
+    
+    $.ajax({
+        type: "POST",
+        url: "../php/dbconnect.php",
+        dataType: 'json',
+        data: {
+            'check_search': 1,
+            'search': search,
+        },
+        
+        success: function(data) {
+            console.log(data);
+            $.each(data, function (indexInArray, valueOfElement) { 
+                 
+                $('#removetable').append("<tr><td><input type='checkbox'></td><td>"+ valueOfElement['to_send']+"</td><td>"+valueOfElement['subject_line']+"</td><td>"+valueOfElement['date_time']+"</td></tr>");
+            });
+               
+               
+
+
+        }
+    });
+});
+});
+
+</script>
+<script>
+
+//pagination
+$(document).ready(function() {
+    function loadTable(page){
+      $.ajax({
+        url:"../php/dbconnect.php",
+        type: "POST",
+        data: {
+            'check_page_inbox': 1,
+            'page_no_inbox' :page },
+        success: function(data) {
+            var res = JSON.parse(data);
+            if(res.type == "pagination"){
+                // console.log(res.html)
+                // $("#removetable").html('');
+                $(".removable-table").html('');
+                $(".removable-table").append(res.html);
+            }
+        }
+      });
+    }
+    loadTable();
+    //Pagination Code
+    $(document).on("click","#pagination a",function(e) {
+      e.preventDefault();
+      var page_id = $(this).attr("id");
+
+      loadTable(page_id);
+    })
+  });
+</script>
+
+</script>
 
 
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="../js1/compose.js"></script>
-        <!-- <script src="/js1/showhide.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 
     </html>
+   
+        <!-- <script src="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="></script> -->
+<script src="../js1/compose.js"></script>
+        <!-- <script src="/js1/showhide.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+
+        <script>
 <?php
 } else {
     header("location:login.php");

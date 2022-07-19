@@ -7,10 +7,10 @@ if (isset($_POST["submit"]) && $_POST["submit"] != "") {
     $email = $_SESSION['email'];
     $message_id = $_POST['message_id'];
     // print($email);
-    $result = $obj->inbox_delete_data($email,$message_id);
+    $result = $obj->inbox_delete_data($email, $message_id);
 }
 if (isset($_POST['compose_msg_send'])) {
-       
+
     $to = $_POST['to'];
     $from = $_SESSION['email'];
     $subject = $_POST['subject'];
@@ -25,17 +25,17 @@ if (isset($_POST['compose_msg_send'])) {
 if (isset($_POST['draft'])) {
     //   echo "<pre>"; 
     //     print_r(($_POST)); die("kk");
-        $to = $_POST['to'];
-        $from = $_SESSION['email'];
-        $subject = $_POST['subject'];
-        $cc = $_POST['cc'];
-        $bcc = $_POST['bcc'];
-        $message = $_POST['message'];
-        $attachement = $_FILES['pictures']['name'];
-        $name_image_temp = $_FILES['pictures']['tmp_name'];
-        move_uploaded_file($name_image_temp, "../images/" . $attachement);
-        $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
-    }
+    $to = $_POST['to'];
+    $from = $_SESSION['email'];
+    $subject = $_POST['subject'];
+    $cc = $_POST['cc'];
+    $bcc = $_POST['bcc'];
+    $message = $_POST['message'];
+    $attachement = $_FILES['pictures']['name'];
+    $name_image_temp = $_FILES['pictures']['tmp_name'];
+    move_uploaded_file($name_image_temp, "../images/" . $attachement);
+    $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
+}
 
 
 if ($_SESSION['login']) {
@@ -68,8 +68,7 @@ if ($_SESSION['login']) {
             <!-- //check -->
             <div class="col-lg-6 col-md-6 col-6">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button>
+                    <input type="search" id="searchdata" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 </div>
             </div>
             <div class="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-end mt-md-8">
@@ -124,70 +123,57 @@ if ($_SESSION['login']) {
                 </nav>
 
                 <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
-                <form name="frmUser" method="post">
-                    <div class="row actio_bar m-4">
+                    <form name="frmUser" method="post">
+                        <div class="row actio_bar m-4">
                             <div>
                                 <span class="mr-2">
                                     <input type="checkbox" name="" title="select all">
-                                    <input name="submit" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;" class="btn btn-outline-primary" id="hide"
-                                     style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
+                                    <input name="submit" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;" class="btn btn-outline-primary" id="hide" style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
                             </div>
-                        </span>
+                            </span>
 
 
-                        <div class="d-grid gap-2 d-md-block">
+                            <div class="d-grid gap-2 d-md-block">
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <div class="card">
-                                <h5 class="card-header">Inbox</h5>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                                <?php
-                                                $sql = $obj->inbox_data($_SESSION['email']);
-                                             
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <div class="card">
+                                    <h5 class="card-header">Inbox</h5>
+                                    <div class="card-body">
+                                        <div class="table-responsive removable-table">
+                                            <table class="table" id="removetable">
+                                                <tbody>
+                                                    <?php
+                                                    $sql = $obj->inbox_data($_SESSION['email']);
 
-                                                while ($row = mysqli_fetch_array($sql)) {
-                                                ?>
-                                                 
-                                                      <tr >
-                                                        <td><input type="checkbox" name="" ></td>
-                                                        <input type="hidden" name="message_id[]" id="message_id" value="<?php  echo $row['id'];?>">
-                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send']?></td>
-                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line']?></td>
-                                                        <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time']?></td>
-                                                    </tr>
-                                                <?php
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
 
+                                                    while ($row = mysqli_fetch_array($sql)) {
+                                                    ?>
+
+                                                        <tr>
+                                                            <td><input type="checkbox" name=""></td>
+                                                            <input type="text" name="message_id[]" id="message_id" value="<?php echo $row['id']; ?>">
+                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send'] ?></td>
+                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line'] ?></td>
+                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time'] ?></td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-                            </form>
+                                </div>
+                    </form>
                 </main>
             </div>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -243,7 +229,7 @@ if ($_SESSION['login']) {
                     <div class="modal-footer">
                         <input type="file" name="pictures">
                         <button type="submit" class="btn btn-secondary" name="draft" value="close" data-bs-dismiss="modal">Close</button>
-                        <button type="submit"  onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
+                        <button type="submit" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
                     </div>
                     </form>
                 </div>
@@ -255,52 +241,123 @@ if ($_SESSION['login']) {
 
 
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<?php
-
-if(isset($_SESSION['Compose']) && $_SESSION['Compose'] !='')
-{
-
-?>
-
-<script>swal({
-title: "<?php echo $_SESSION['Compose']  ?>",
-text: "",
-icon: "<?php echo $_SESSION['compose_code']  ?>",
-button: "Ok Done",
-}); 
-</script>
-<?php
-unset($_SESSION['Compose']);
-
-}
-
-
-?>
-</script>
-    
-    <?php
-    
-    if(isset($_SESSION['draft']) && $_SESSION['draft'] !='')
-    {
-    
-        ?>
-    
-    <script>swal({
-      title: "<?php echo $_SESSION['draft']  ?>",
-      text: "",
-      icon: "<?php echo $_SESSION['draft_code']  ?>",
-      button: "Ok Done",
-    }); 
-    </script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <?php
-    unset($_SESSION['draft']);
-    
+
+        if (isset($_SESSION['Compose']) && $_SESSION['Compose'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['Compose']  ?>",
+                    text: "",
+                    icon: "<?php echo $_SESSION['compose_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['Compose']);
+        }
+
+
+        ?>
+        </script>
+
+        <?php
+
+        if (isset($_SESSION['draft']) && $_SESSION['draft'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['draft']  ?>",
+                    text: "",
+                    icon: "<?php echo $_SESSION['draft_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['draft']);
+        }
+
+
+        ?>
+
+        <script>
+            $(document).ready(function() {
+
+
+                $('#searchdata').keyup(function(e) {
+                    e.preventDefault();
+                    var search = $('#searchdata').val();
+                //     $('#searchdata')(function() {
+                //     $('#removetable').empty();
+                // });
+                    
+                    $.ajax({
+                      
+                        type: "POST",
+                        url: "../php/dbconnect.php",
+                        dataType: 'json',
+                        data: {
+                            'check_search': 1,
+                            'search': search,
+                        },
+
+                        success: function(data) {
+                            console.log(data);
+                            // $('#removetable').empty();
+                            // console.log()
+                            $.each(data, function(indexInArray, valueOfElement) {
+
+                                $('#removetable').append("<tr><td><input type='checkbox'></td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
+                            });
+
+
+
+
+                        }
+                    });
+                });
+            });
+        </script>
+
+<script>
+//pagination
+$(document).ready(function() {
+    function loadTable(page){
+      $.ajax({
+        url:"../php/dbconnect.php",
+        type: "POST",
+        data: {
+            'check_page_inbox': 1,
+            'page_no_inbox' :page },
+        success: function(data) {
+            var res = JSON.parse(data);
+            if(res.type == "pagination"){
+                // console.log(res.html)
+                // $("#removetable").html('');
+                $(".removable-table").html('');
+                $(".removable-table").append(res.html);
+            }
+        }
+      });
     }
-    
-    
-    ?>
-    
+    loadTable();
+    //Pagination Code
+    $(document).on("click","#pagination a",function(e) {
+      e.preventDefault();
+      var page_id = $(this).attr("id");
+
+      loadTable(page_id);
+    })
+  });
+</script>
+
+
+
 
         <script src="../js1/compose.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
