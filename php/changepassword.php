@@ -3,7 +3,7 @@
 
 if (isset($_POST['reset_code'])) {
     $code = $_POST['reset_code'];
-    $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'mydata');
+    $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
     if ($conn->connect_error) {
         die('Could not connect to the database');
     }
