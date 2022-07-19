@@ -29,8 +29,11 @@ $verifyQuery = $conn->query($sql);
 $fetch_data = mysqli_fetch_assoc($verifyQuery);
 
 $to_mail = $recoverymail['secondemail'];
-
+echo $to_mail;
+echo 'skkkkk';
 if ($to_mail != '') {
+    die('in_tomail');
+
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
     echo 'Message has been sent, check your email';
