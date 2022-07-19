@@ -32,17 +32,8 @@ $to_mail = $fetch_data['secondemail'];
 if ($to_mail != '') {
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
-    echo 'Message has been sent, check your email';
-    // $recoverymail = $fetch_data['secondemail'];
-
-    // echo $to_mail = $recoverymail;
-    // die();
-
 
     if ($verifyQuery->num_rows > 0) {
-        $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
-        $reset = $conn->query($reset_codes);
-
         $mail = new PHPMailer(true);
         try {
 
@@ -55,13 +46,14 @@ if ($to_mail != '') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-            $mail->addAddress($to_mail);
+            $mail->addAddress($to_mail,'vijay');
             $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset';
             $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
+            echo 'mail send successfully';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
