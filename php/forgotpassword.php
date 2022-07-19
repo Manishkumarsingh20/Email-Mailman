@@ -37,7 +37,6 @@ if ($to_mail != '') {
     if ($verifyQuery->num_rows > 0) {
 
         $mail = new PHPMailer(true);
-
         try {
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
@@ -52,19 +51,21 @@ if ($to_mail != '') {
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
             $mail->addAddress($to_mail);     // Add a recipient
 
-            
 
-            // Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Password Reset';
-            $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
-            echo "success please check your $to_mail";
-            $conn->close();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
-    $conn->close();
-} else {
-    echo 'username or email not found';
+ // Content
+ $mail->isHTML(true);                                  // Set email format to HTML
+ $mail->Subject = 'Password Reset';
+ $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
+
+ echo "success please check your $to_mail";
+ $conn->close();
+} catch (Exception $e) {
+ echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+}
+$conn->close();
+} else {
+echo 'username or email not found';
+}
+
+
