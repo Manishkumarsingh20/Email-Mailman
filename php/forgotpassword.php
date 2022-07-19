@@ -1,6 +1,7 @@
 <?php
 
-
+echo 'lsdkj';
+die;
 if (isset($_POST['reset'])) {
     $second_email = $_POST['email'];
 } else {
