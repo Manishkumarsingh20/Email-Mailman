@@ -36,7 +36,8 @@ if ($to_mail != '') {
     if ($verifyQuery->num_rows > 0) {
         $mail = new PHPMailer(true);
         try {
-
+            echo $to_mail;
+            echo 'in try';
             $mail->send();
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
@@ -46,7 +47,7 @@ if ($to_mail != '') {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-            $mail->addAddress('joe@example.net', 'Joe User');
+            $mail->addAddress($to_mail);
             $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
