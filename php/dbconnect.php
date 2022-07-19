@@ -228,11 +228,202 @@ public function username_already($username){
     }
 }
 
+public function search($search,$email,$data){
 
+    $search=$_POST['search'];
+    $sql="SELECT subject_line,to_send, from_send ,date_time FROM email WHERE (to_send='$email' OR from_send='$email') AND subject_line LIKE '%$search%' ";
+    $result=$this->connect_db->query($sql);
+    // print_r(($result->fetch_all(MYSQLI_ASSOC))); 
+  
+    if(mysqli_num_rows($result)>0){
+      $data=$result->fetch_all(MYSQLI_ASSOC);
+      
+    echo json_encode($data); 
+    }else{
+        echo json_encode("NOT Found");
+    }
+}
+
+
+public function pagination_sent($page,$data,$email){
+    
+    $limit_per_page = 10;
+
+    $page = "";
+    if(isset($_POST["page_no"])){
+      $page = $_POST["page_no"];
+    }else{
+      $page = 1;
+    }
+  
+    $offset = ($page - 1) * $limit_per_page;
+  
+    $sql = "SELECT * FROM email WHERE from_send='$email' LIMIT $offset,$limit_per_page";
+    $result=$this->connect_db->query($sql);
+    $output= "";
+    if(mysqli_num_rows($result) > 0){
+        // $row = mysqli_fetch_assoc($result);
+        $data=$result->fetch_all(MYSQLI_ASSOC);
+        $output .= " <table class='table' id='removetable'>
+        <tbody>";
+        foreach($data as $key => $val){
+            $output .= "<tr>
+            <td><input type='checkbox' value='".$val['id']."'></td>
+            <td>".$val['to_send']."</td>
+            <td>".$val['subject_line']."</td>
+            <td>".$val['date_time']."</td>
+            </tr>";
+
+        }
+
+        $output .= " </tbody>
+        </table>";
+        
+        
+        $sql_total = "SELECT * FROM email";
+        $records=$this->connect_db->query($sql_total); ;
+        $total_record = mysqli_num_rows($records);
+        $total_pages = ceil($total_record/$limit_per_page);
+        // print_r(($total_record)); die(" nnnn ");
+  
+      $output .='<div id="pagination">';
+  
+      for($i=1; $i <= $total_pages; $i++){
+        if($i == $page){
+          $class_name = "active";
+        }else{
+          $class_name = "";
+        }
+        $output .= "<a class='$class_name' id='$i' href=''>$i|</a>";
+      }
+      $output .='</div>';
+  
+      echo json_encode(["status" => true, "html" => $output, "type" => "pagination"]);
+    }else{
+      echo "<h2>No Record Found.</h2>";
+    }
+}
+
+public function pagination_inbox($page,$data,$email){
+    
+    $limit_per_page = 10;
+
+    $page = "";
+    if(isset($_POST["page_no_inbox"])){
+      $page = $_POST["page_no_inbox"];
+    }else{
+      $page = 1;
+    }
+  
+    $offset = ($page - 1) * $limit_per_page;
+  
+    $sql = "SELECT * FROM email WHERE from_send='$email' LIMIT $offset,$limit_per_page";
+    $result=$this->connect_db->query($sql);
+    $output= "";
+    if(mysqli_num_rows($result) > 0){
+        // $row = mysqli_fetch_assoc($result);
+        $data=$result->fetch_all(MYSQLI_ASSOC);
+        $output .= " <table class='table' id='removetable'>
+        <tbody>";
+        foreach($data as $key => $val){
+            $output .= "<tr>
+            <td><input type='checkbox' value='".$val['id']."'></td>
+            <td>".$val['from_send']."</td>
+            <td>".$val['subject_line']."</td>
+            <td>".$val['date_time']."</td>
+            </tr>";
+
+        }
+
+        $output .= " </tbody>
+        </table>";
+        
+        
+        $sql_total = "SELECT * FROM email";
+        $records=$this->connect_db->query($sql_total); ;
+        $total_record = mysqli_num_rows($records);
+        $total_pages = ceil($total_record/$limit_per_page);
+        // print_r(($total_record)); die(" nnnn ");
+  
+      $output .='<div id="pagination">';
+  
+      for($i=1; $i <= $total_pages; $i++){
+        if($i == $page){
+          $class_name = "active";
+        }else{
+          $class_name = "";
+        }
+        $output .= "<a class='$class_name' id='$i' href=''>$i|</a>";
+      }
+      $output .='</div>';
+  
+      echo json_encode(["status" => true, "html" => $output, "type" => "pagination"]);
+    }else{
+      echo "<h2>No Record Found.</h2>";
+    }
+}
+
+public function pagination_draft($page,$data,$email){
+    
+    $limit_per_page = 10;
+
+    $page = "";
+    if(isset($_POST["page_no_draft"])){
+      $page = $_POST["page_no_draft"];
+    }else{
+      $page = 1;
+    }
+  
+    $offset = ($page - 1) * $limit_per_page;
+  
+     $sql = "SELECT * FROM email WHERE from_send='$email' AND draft=1 LIMIT $offset,$limit_per_page";
+    $result=$this->connect_db->query($sql);
+    $output= "";
+    if(mysqli_num_rows($result) > 0){
+        // $row = mysqli_fetch_assoc($result);
+        $data=$result->fetch_all(MYSQLI_ASSOC);
+        $output .= " <table class='table' id='removetable'>
+        <tbody>";
+        foreach($data as $key => $val){
+            $output .= "<tr>
+            <td><input type='checkbox' value='".$val['id']."'></td>
+            <td>".$val['to_send']."</td>
+            <td>".$val['subject_line']."</td>
+            <td>".$val['date_time']."</td>
+            </tr>";
+
+        }
+
+        $output .= " </tbody>
+        </table>";
+        
+        
+        $sql_total = "SELECT * FROM email";
+        $records=$this->connect_db->query($sql_total); ;
+        $total_record = mysqli_num_rows($records);
+        $total_pages = ceil($total_record/$limit_per_page);
+        // print_r(($total_record)); die(" nnnn ");
+  
+      $output .='<div id="pagination">';
+  
+      for($i=1; $i <= $total_pages; $i++){
+        if($i == $page){
+          $class_name = "active";
+        }else{
+          $class_name = "";
+        }
+        $output .= "<a class='$class_name' id='$i' href=''>$i|</a>";
+      }
+      $output .='</div>';
+  
+      echo json_encode(["status" => true, "html" => $output, "type" => "pagination"]);
+    }else{
+      echo "<h2>No Record Found.</h2>";
+    }
+}
 
 
 }
-
 
 $obj = new dbconnection();
 if(isset($_POST['check_Emailbtn']) && !empty($_POST['check_Emailbtn'])){
@@ -241,5 +432,17 @@ if(isset($_POST['check_Emailbtn']) && !empty($_POST['check_Emailbtn'])){
 if(isset($_POST['check_userbtn']) && !empty($_POST['check_userbtn'])){
     $obj->username_already($_POST['check_userbtn']);
 }
+if(isset($_POST['check_search']) && !empty($_POST['check_search'])){
+    $obj->search($_POST['check_search'],$_SESSION['email'],$data);
+}
 
+if(isset($_POST['check_page']) && !empty($_POST['check_page'])){
+    $obj->pagination_sent($page,$data,$_SESSION['email']);
+}
+if(isset($_POST['check_page_inbox']) && !empty($_POST['check_page_inbox'])){
+    $obj->pagination_inbox($page,$data,$_SESSION['email']);
+}
+if(isset($_POST['check_page_draft']) && !empty($_POST['check_page_draft'])){
+    $obj->pagination_draft($page,$data,$_SESSION['email']);
+}
 

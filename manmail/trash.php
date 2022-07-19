@@ -53,6 +53,8 @@ if ($_SESSION['login']) {
         <!-- <link rel="stylesheet" href="../css1/emailpage.css"> -->
         <link rel="stylesheet" href="../css1/dashboard.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 
     </head>
 
@@ -70,8 +72,8 @@ if ($_SESSION['login']) {
             <!-- //check -->
             <div class="col-lg-6 col-md-6 col-6">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button>
+                    <input type="search" id="searchdata" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    
                 </div>
             </div>
             <div class="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-end mt-md-8">
@@ -151,7 +153,7 @@ if ($_SESSION['login']) {
                                 <h5 class="card-header">Trash</h5>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" id="removetable">
                                             <tbody>
                                             <?php
                                                 $sql = $obj->trash($_SESSION['email']);
@@ -310,6 +312,45 @@ unset($_SESSION['draft']);
 
 
 ?>
+
+<script>
+
+$(document).ready(function() {
+
+
+$('#searchdata').keyup(function(e) {
+    e.preventDefault();
+    var search = $('#searchdata').val();
+    
+    $.ajax({
+        type: "POST",
+        url: "../php/dbconnect.php",
+        dataType: 'json',
+        data: {
+            'check_search': 1,
+            'search': search,
+        },
+        
+        success: function(data) {
+            console.log(data);
+            $.each(data, function (indexInArray, valueOfElement) { 
+                 
+                $('#removetable').append("<tr><td><input type='checkbox'></td><td>"+ valueOfElement['subject_line']+"</td><td>"+valueOfElement['to_send']+"</td><td>"+valueOfElement['date_time']+"</td></tr>");
+            });
+               
+               
+
+
+        }
+    });
+});
+});
+
+
+
+
+</script>
+
 
        
 
