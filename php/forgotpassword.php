@@ -3,6 +3,7 @@
 
 if (isset($_POST['reset'])) {
     $email = $_POST['email'];
+    $username=$_POST['username'];
 } else {
     exit();
 }
@@ -27,8 +28,10 @@ try {
     $mail->Port       = 465;                                    
    
     $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-    // $to_mail = $_POST['email'];
-    $mail->addAddress($email);     
+    $to_mail = $_POST['email'];
+    $to_username = $_POST['username'];
+    $mail->addAddress($email);  
+    $mail->addAddress($username);  
     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
@@ -37,7 +40,7 @@ try {
     $mail->Subject = 'Password Reset';
     $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
 
-    $conn = new mySqli('localhost', 'root', 'hestabit', 'mydata');
+    $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
 
     if ($conn->connect_error) {
         die('Could not connect to the database.');
