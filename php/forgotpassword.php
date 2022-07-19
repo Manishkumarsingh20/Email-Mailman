@@ -3,7 +3,6 @@
 
 if (isset($_POST['reset'])) {
     $email = $_POST['email'];
-    $username=$_POST['username'];
 } else {
     exit();
 }
@@ -28,10 +27,8 @@ try {
     $mail->Port       = 465;                                    
    
     $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-    $to_mail = $_POST['email'];
-    $to_username = $_POST['username'];
-    $mail->addAddress($email);  
-    $mail->addAddress($username);  
+    // $to_mail = $_POST['email'];
+    $mail->addAddress($email);     
     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
