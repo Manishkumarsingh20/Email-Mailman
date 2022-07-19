@@ -28,11 +28,8 @@ $verifyQuery = $conn->query($sql);
 
 $fetch_data = mysqli_fetch_assoc($verifyQuery);
 $to_mail = $fetch_data['secondemail'];
-echo $to_mail;
-echo 'skkkkk';
-if ($to_mail != '') {
-    die('in_tomail');
 
+if ($to_mail != '') {
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
     echo 'Message has been sent, check your email';
@@ -68,8 +65,9 @@ if ($to_mail != '') {
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-    } else {
-        echo 'username or email not found';
-    }
+    } 
     $conn->close();
+}
+else {
+    echo 'username or email not found';
 }
