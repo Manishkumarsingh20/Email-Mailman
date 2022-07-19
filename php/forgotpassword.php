@@ -1,76 +1,70 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 echo 'sdklf';
 
-// if (isset($_POST['reset'])) {
-//     $second_email = $_POST['email'];
-// } else {
-//     exit();
-// }
+if (isset($_POST['reset'])) {
+    $second_email = $_POST['email'];
+} else {
+    exit();
+}
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
-// use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// require 'mail/Exception.php';
-// require 'mail/PHPMailer.php';
-// require 'mail/SMTP.php';
-// $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
+require 'mail/Exception.php';
+require 'mail/PHPMailer.php';
+require 'mail/SMTP.php';
+$conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
 
-// if ($conn->connect_error) {
-//     die('Could not connect to the database.');
-// }
-
-
-// $sql = "SELECT * FROM users WHERE username='$second_email' OR email='$second_email'";
-
-// $verifyQuery = $conn->query($sql);
-
-// $fetch_data = mysqli_fetch_assoc($verifyQuery);
+if ($conn->connect_error) {
+    die('Could not connect to the database.');
+}
 
 
-// $recoverymail = $fetch_data['secondemail'];
+$sql = "SELECT * FROM users WHERE username='$second_email' OR email='$second_email'";
 
-// echo $to_mail = $recoverymail;
-// die();
+$verifyQuery = $conn->query($sql);
 
-// if ($verifyQuery->num_rows > 0) {
-//     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
-//     $reset = $conn->query($reset_codes);
-//     echo 'Message has been sent, check your email';
+$fetch_data = mysqli_fetch_assoc($verifyQuery);
 
-//     $mail = new PHPMailer(true);
 
-//     // try {
+$recoverymail = $fetch_data['secondemail'];
 
-//     //     $mail->send();
 
-//     //     $mail->isSMTP();
-//     //     $mail->Host       = 'smtp.gmail.com';
-//     //     $mail->SMTPAuth   = true;
-//     //     $mail->Username   = 'manishkumarsingh1798@gmail.com';
-//     //     $mail->Password   = 'zyfhcwesddjwkeif';
-//     //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-//     //     $mail->Port       = 465;
+if ($verifyQuery->num_rows > 0) {
+    $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
+    $reset = $conn->query($reset_codes);
+    echo 'Message has been sent, check your email';
 
-//     //     $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
-//     //     $to_mail = $recoverymail;
-//     //     $mail->addAddress($email);
-//     //     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
+    $mail = new PHPMailer(true);
+
+    try {
+
+        $mail->send();
+
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'manishkumarsingh1798@gmail.com';
+        $mail->Password   = 'zyfhcwesddjwkeif';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
+
+        $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
+        $to_mail = $recoverymail;
+        $mail->addAddress($email);
+        $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
 
 
 
-//     //     $mail->isHTML(true);
-//     //     $mail->Subject = 'Password Reset';
-//     //     $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
-//     // } catch (Exception $e) {
-//     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-//     // }
-// } else {
-//     echo 'username or email not found';
-// }
-// $conn->close();
-
-?>
+        $mail->isHTML(true);
+        $mail->Subject = 'Password Reset';
+        $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+} else {
+    echo 'username or email not found';
+}
+$conn->close();
