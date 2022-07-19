@@ -402,6 +402,8 @@ $(document).ready(function() {
       loadTable(page_id);
     })
   });
+
+ 
 </script>
 
 </script>

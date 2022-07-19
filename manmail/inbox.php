@@ -6,6 +6,8 @@ $obj = new dbconnection;
 if (isset($_POST["submit"]) && $_POST["submit"] != "") {
     $email = $_SESSION['email'];
     $message_id = $_POST['message_id'];
+    print_r($email);
+    die("00");
     // print($email);
     $result = $obj->inbox_delete_data($email, $message_id);
 }
