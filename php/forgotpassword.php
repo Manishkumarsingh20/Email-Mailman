@@ -30,6 +30,7 @@ $fetch_data = mysqli_fetch_assoc($verifyQuery);
 $to_mail = $fetch_data['secondemail'];
 
 if ($to_mail != '') {
+    $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
     $reset_codes = "UPDATE users SET reset_code = '$code' WHERE username='$second_email' OR email='$second_email'";
     $reset = $conn->query($reset_codes);
 
@@ -51,13 +52,13 @@ if ($to_mail != '') {
             $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
             $mail->addAddress($to_mail);     // Add a recipient
 
-            $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
+            
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Password Reset';
             $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
-            echo 'success';
+            echo "success please check your $to_mail";
             $conn->close();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
