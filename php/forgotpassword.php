@@ -30,6 +30,8 @@ $fetch_data = mysqli_fetch_assoc($verifyQuery);
 
 
 $recoverymail = $fetch_data['secondemail'];
+echo $recoverymail;
+die;
 
 <<<<<<< HEAD
 echo $to_mail = $recoverymail;
