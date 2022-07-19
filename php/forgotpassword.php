@@ -33,7 +33,7 @@ try {
    
      
     $recoverymail = $fetch_data['secondemail'];
-    if ($verifyQuery->num_rows) {
+    if ($verifyQuery->num_rows > 0 ) {
         $reset_codes = "UPDATE users SET reset_code = '$code' WHERE (username='$second_email' OR email='$second_email'";
         $reset = $conn->query($reset_codes);
         $mail->send();
@@ -58,6 +58,8 @@ try {
         $mail->Subject = 'Password Reset';
         $mail->Body    = 'To reset your password click <a href="http://hestalabs.com/tse/mailnam-manish/manmail/newpassword.php?code=' . $code . '">click here </a> </br>Reset your password in a day.';
     
+    }else{
+        echo 'username or email not found';
     }
     $conn->close();
 } catch (Exception $e) {
