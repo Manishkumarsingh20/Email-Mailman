@@ -90,3 +90,5 @@ if ($recoverymail != '') {
 //     echo 'username or email not found';
 // }
 // $conn->close();
+
+?>
