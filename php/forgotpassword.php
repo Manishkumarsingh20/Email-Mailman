@@ -27,8 +27,7 @@ $verifyQuery = $conn->query($sql);
 
 
 $fetch_data = mysqli_fetch_assoc($verifyQuery);
-
-$to_mail = $recoverymail['secondemail'];
+$to_mail = $fetch_data['secondemail'];
 echo $to_mail;
 echo 'skkkkk';
 if ($to_mail != '') {
