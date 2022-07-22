@@ -487,20 +487,20 @@ public function read_sent($message,$email){
 
 }
 
-public function unread_sent($message,$email){
+// public function unread_sent($message,$email){
    
    
-    $sql="UPDATE email SET unread=1 WHERE from_send = '$email' && id = '$message'";
-    $result = $this->connect_db->query($sql);
-    if($result){
-        echo "";
+//     $sql="UPDATE email SET unread=1 WHERE from_send = '$email' && id = '$message'";
+//     $result = $this->connect_db->query($sql);
+//     if($result){
+//         echo "";
 
-    }
-    else{
-      echo  "";
-    }
+//     }
+//     else{
+//       echo  "";
+//     }
 
-}
+// }
 
 
 }

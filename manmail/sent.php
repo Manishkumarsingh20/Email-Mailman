@@ -7,11 +7,11 @@ include_once "../php/dbconnect.php";
 
 $obj = new dbconnection;
 
-if(isset($_POST['read_msg'])){
-    $message=$_POST['unread_msg'];
-    $email = $_SESSION['email'];
-    $read=$obj->read_sent($message,$email);
-}
+// if(isset($_POST['read_msg'])){
+//     $message=$_POST['unread_msg'];
+//     $email = $_SESSION['email'];
+//     $read=$obj->read_sent($message,$email);
+// }
 
 
 if(isset($_POST['read_msg'])){
