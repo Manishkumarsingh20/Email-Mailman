@@ -436,8 +436,8 @@ public function pagination_draft($page,$data,$email){
         // print_r(($total_record)); die(" nnnn ");
   
       $output .='<div id="pagination">';
-  
-      for($i=1; $i <=3.5* $total_pages; $i++){
+         $page_value=ceil(3.5* $total_pages);
+      for($i=1; $i <=$page_value; $i++){
         if($i == $page){
           $class_name = "active";
         }else{
