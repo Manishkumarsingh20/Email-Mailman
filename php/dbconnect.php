@@ -353,6 +353,9 @@ public function pagination_inbox($page,$data,$email){
             $class = "";
             if($val['read'] == 0){
                 $class = "font-weight : bold";
+            }else{
+                if($val['unread']==1)
+                $class="font-weight:bold";
             }
             $output .= "<tr style='" . $class . "'>
             <td ><input type='checkbox'  class='checkbox'  name='message_inbox' id='message_inbox' value='".$val['id']."'></td>
@@ -484,20 +487,20 @@ public function read_sent($message,$email){
 
 }
 
-// public function unread_sent($message,$email){
+public function unread_msg($message,$email){
    
    
-//     $sql="UPDATE email SET unread=1 WHERE from_send = '$email' && id = '$message'";
-//     $result = $this->connect_db->query($sql);
-//     if($result){
-//         echo "";
+    $sql="UPDATE email SET unread=1 WHERE from_send = '$email' && id = '$message'";
+    $result = $this->connect_db->query($sql);
+    if($result){
+        echo "";
 
-//     }
-//     else{
-//       echo  "";
-//     }
+    }
+    else{
+      echo  "";
+    }
 
-// }
+}
 
 
 }

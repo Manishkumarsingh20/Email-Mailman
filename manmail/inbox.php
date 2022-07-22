@@ -9,6 +9,11 @@ if(isset($_POST['read_msg'])){
        $read=$obj->read($message,$email);
 }
 
+if(isset($_POST['unread_msg'])){
+    $message=$_POST['message_inbox'];
+    $email = $_SESSION['email'];
+    $read=$obj->unread_msg($message,$email);
+}
 
 
 if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
@@ -139,7 +144,7 @@ if ($_SESSION['login']) {
                                     <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
                                     <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
                                     <input type="submit"  name="read_msg" style="padding: 4px 11px 3px 14px;margin: -8px -149px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Read"></input>
-                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -230px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Unread"></input>
+                                    <input type="submit"  name="unread_msg" style="padding: 4px 11px 3px 14px;margin: -8px -230px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Unread"></input>
                             </div>
                             </span>
 
