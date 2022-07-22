@@ -14,11 +14,11 @@ $obj = new dbconnection;
 // }
 
 
-if(isset($_POST['read_msg'])){
-    $message=$_POST['message_sent'];
-    $email = $_SESSION['email'];
-    $read=$obj->read_sent($message,$email);
-}
+// if(isset($_POST['read_msg'])){
+//     $message=$_POST['message_sent'];
+//     $email = $_SESSION['email'];
+//     $read=$obj->read_sent($message,$email);
+// }
 
 
 // var_dump($_POST['submit']);
