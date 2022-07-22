@@ -155,6 +155,7 @@ if ($_SESSION['login']) {
                                     <div class="table-responsive">
                                         <table class="table" id="removetable">
                                             <tbody>
+                                           
                                             <?php
                                                 $sql = $obj->trash($_SESSION['email']);
                                                 

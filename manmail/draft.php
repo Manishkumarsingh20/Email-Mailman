@@ -5,11 +5,11 @@ $obj = new dbconnection;
 if ($_SESSION['login']) {
 
 
-    if (isset($_POST["submit"]) && $_POST["submit"] != "") {
+    if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
         $email = $_SESSION['email'];
-        $message_id = $_POST['message_id'];
+        $message_id = $_POST['message_draft'];
         // print($email);
-        $result = $obj->delete_data($email, $message_id);
+        $result = $obj->draft_delete_data($email, $message_id);
     }
 
 
@@ -138,12 +138,10 @@ if ($_SESSION['login']) {
                 <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
                     <form name="frmUser" method="post">
                         <div class="row actio_bar m-4">
-                            <div>
-
-
+                        <div>
                                 <span class="mr-2">
                                     <input type="checkbox" name="" title="select all">
-                                    <input name="submit" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;" class="btn btn-outline-primary" id="hide" style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
+                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
                             </div>
                             </span>
                             <div class="d-grid gap-2 d-md-block">
@@ -159,18 +157,20 @@ if ($_SESSION['login']) {
                                                 <tbody>
                                                     <?php
                                                     $sql = $obj->draft($_SESSION['email']);
-
+                                                   
                                                     while ($row = mysqli_fetch_array($sql)) {
+                                                    //    echo "<pre>" ; echo var_dump($row);
+                                                    //     die("00");
                                                         $_SESSION['id'] = $row['id'];
                                                     ?>
                                                         <tr>
-                                                            <td>
-                                                                <input type="checkbox" name="" id="checkbox">
-                                                                <input type="hidden" name="message_id[]" id="message_id" value="<?php echo $row['id']; ?>">
+                                                        <td>
+                                                            <td><input type="checkbox" class="checkbox" name=""></td>
+                                                            <input type="hidden" name="message_draft" id="message_draft"  value="<?php echo $row['id']; ?>">
                                                             </td>
-                                                            <td onclick="window.location='draftdetail.php';">><?php echo $row['to_send'] ?></td>
-                                                            <td onclick="window.location='draftdetail.php';">><?php echo $row['subject_line'] ?></td>
-                                                            <td onclick="window.location='draftdetail.php';">><?php echo $row['date_time'] ?></td>
+                                                            <td onclick="window.location='draftdetail.php';"><?php echo $row['to_send'] ?></td>
+                                                            <td onclick="window.location='draftdetail.php';"><?php echo $row['subject_line'] ?></td>
+                                                            <td onclick="window.location='draftdetail.php';"><?php echo $row['date_time'] ?></td>
                                                         </tr>
                                                     <?php
                                                     }
@@ -321,7 +321,7 @@ if ($_SESSION['login']) {
                             console.log(data);
                             $.each(data, function(indexInArray, valueOfElement) {
 
-                                $('#removetable').append("<tr><td><input type='checkbox'></td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
+                                $('#removetable').append("<tr><td><input type='checkbox' name='message_draft' id='message_draft'></td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
                             });
 
 
@@ -364,6 +364,24 @@ if ($_SESSION['login']) {
                 })
             });
         </script>
+
+<script>
+
+$(document).on("click", ".checkbox", function () {
+    if ($("input[type=checkbox]").is(":checked")) {
+    
+
+        $(".hide").removeClass("d-none");
+        
+    } else {
+        $(".hide").addClass("d-none");
+        
+    }
+});
+
+
+</script>
+
 
 
 

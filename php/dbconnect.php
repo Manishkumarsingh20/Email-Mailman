@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 class dbconnection
 {
     protected $db_name = 'manish';
@@ -126,25 +127,30 @@ class dbconnection
 
     public function fetchdata($email)
     {
-        $query = "SELECT * from email WHERE from_send='$email' and fromdelete =0";
+        $query = "SELECT * from email WHERE from_send='$email' and fromdelete =0 and draft != 1";
         $result = $this->connect_db->query($query);
         return $result;
+
     }
 
+
     public function inbox_data($email){
-        $query = "SELECT * from email WHERE to_send ='$email' and todelete=0";
-        $result = $this->connect_db->query($query);
+        // die("second");
         
+        $query = "SELECT * from email WHERE to_send ='$email' and todelete=0 ";
+        $result = $this->connect_db->query($query);
+
         return $result;
         
     }
+
 
 
     public function delete_data($email,$message_id){
-        foreach($message_id as $deleteid){
-            $sql="UPDATE email SET fromdelete=1 WHERE from_send = '$email' && id = '$deleteid'";
+        
+            $sql="UPDATE email SET fromdelete=1 WHERE from_send = '$email' && id = '$message_id'";
             $result = $this->connect_db->query($sql);
-        }
+        
         if($result){
             echo '<script language="javascript">';
             echo 'alert("Deleted successfully")';
@@ -157,20 +163,32 @@ class dbconnection
 
 
 
+public function inbox_delete_data($email,$message_id){
+      
+    $sql="UPDATE email SET todelete=1 WHERE from_send = '$email' && id = '$message_id'";
+    $result = $this->connect_db->query($sql);
 
-         public function inbox_delete_data($email,$message_id){
-          foreach($message_id as $deleteid){
-           $sql="UPDATE email SET todelete=1 WHERE to_send = '$email' AND id = '$deleteid'";
-          $result = $this->connect_db->query($sql);
-       }
-       if($result){
-        echo '<script language="javascript">';
-        echo 'alert("Deleted successfully")';
-        echo '</script>';
-    }else{
-        echo "not deleted";
-    }
+if($result){
+    echo '<script language="javascript">';
+    echo 'alert("Deleted successfully")';
+    echo '</script>';
+}else{
+    echo "not deleted";
+}
+}
 
+public function draft_delete_data($email,$message_id){
+      
+  $sql="UPDATE email SET fromdelete=1 WHERE from_send = '$email' && id = '$message_id'";
+    $result = $this->connect_db->query($sql);
+
+if($result){
+    echo '<script language="javascript">';
+    echo 'alert("Deleted successfully")';
+    echo '</script>';
+}else{
+    echo "not deleted";
+}
 }
 
 
@@ -191,7 +209,9 @@ public function insert_draft($to, $from, $subject, $cc, $bcc, $message, $attache
 
 public function draft($email)
 {
-    $query = "SELECT * from email WHERE from_send='$email' AND draft =1";
+
+    $query = "SELECT * from email WHERE from_send='$email' AND fromdelete=0 AND draft=1";
+    // echo $query; die(" hh ");
     $result = $this->connect_db->query($query);
     return $result;
 }
@@ -258,7 +278,8 @@ public function pagination_sent($page,$data,$email){
   
     $offset = ($page - 1) * $limit_per_page;
   
-    $sql = "SELECT * FROM email WHERE from_send='$email' LIMIT $offset,$limit_per_page";
+    $sql = "SELECT * FROM email WHERE from_send='$email' AND fromdelete=0 AND draft != 1 ORDER BY id DESC  LIMIT $offset,$limit_per_page";
+
     $result=$this->connect_db->query($sql);
     $output= "";
     if(mysqli_num_rows($result) > 0){
@@ -267,8 +288,12 @@ public function pagination_sent($page,$data,$email){
         $output .= " <table class='table' id='removetable'>
         <tbody>";
         foreach($data as $key => $val){
-            $output .= "<tr>
-            <td><input type='checkbox' value='".$val['id']."'></td>
+            $class = "";
+            if($val['read'] == 0){
+                $class = "font-weight : bold";
+            }
+            $output .= "<tr style='" . $class . "'>
+            <td><input type='checkbox'class='checkbox' name='message_sent' id='message_sent' value='".$val['id']."'></td>
             <td>".$val['to_send']."</td>
             <td>".$val['subject_line']."</td>
             <td>".$val['date_time']."</td>
@@ -288,7 +313,7 @@ public function pagination_sent($page,$data,$email){
   
       $output .='<div id="pagination">';
   
-      for($i=1; $i <= $total_pages; $i++){
+      for($i=1; $i <=3.5* $total_pages; $i++){
         if($i == $page){
           $class_name = "active";
         }else{
@@ -305,7 +330,7 @@ public function pagination_sent($page,$data,$email){
 }
 
 public function pagination_inbox($page,$data,$email){
-    
+ 
     $limit_per_page = 10;
 
     $page = "";
@@ -317,17 +342,23 @@ public function pagination_inbox($page,$data,$email){
   
     $offset = ($page - 1) * $limit_per_page;
   
-    $sql = "SELECT * FROM email WHERE from_send='$email' LIMIT $offset,$limit_per_page";
+    $sql = "SELECT * FROM email WHERE to_send='$email' AND todelete=0 AND draft != 1  ORDER BY id DESC LIMIT $offset,$limit_per_page";
+
     $result=$this->connect_db->query($sql);
     $output= "";
     if(mysqli_num_rows($result) > 0){
         // $row = mysqli_fetch_assoc($result);
         $data=$result->fetch_all(MYSQLI_ASSOC);
+        
         $output .= " <table class='table' id='removetable'>
         <tbody>";
         foreach($data as $key => $val){
-            $output .= "<tr>
-            <td><input type='checkbox' value='".$val['id']."'></td>
+            $class = "";
+            if($val['read'] == 0){
+                $class = "font-weight : bold";
+            }
+            $output .= "<tr style='" . $class . "'>
+            <td ><input type='checkbox'  class='checkbox'  name='message_inbox' id='message_inbox' value='".$val['id']."'></td>
             <td>".$val['from_send']."</td>
             <td>".$val['subject_line']."</td>
             <td>".$val['date_time']."</td>
@@ -347,9 +378,9 @@ public function pagination_inbox($page,$data,$email){
   
       $output .='<div id="pagination">';
   
-      for($i=1; $i <= $total_pages; $i++){
+      for($i=1; $i <= 3.5*$total_pages; $i++){
         if($i == $page){
-          $class_name = "active";
+          $class_name = "font-weight:bold";
         }else{
           $class_name = "";
         }
@@ -364,7 +395,7 @@ public function pagination_inbox($page,$data,$email){
 }
 
 public function pagination_draft($page,$data,$email){
-    
+  
     $limit_per_page = 10;
 
     $page = "";
@@ -376,7 +407,7 @@ public function pagination_draft($page,$data,$email){
   
     $offset = ($page - 1) * $limit_per_page;
   
-     $sql = "SELECT * FROM email WHERE from_send='$email' AND draft=1 LIMIT $offset,$limit_per_page";
+     $sql = "SELECT * FROM email WHERE from_send='$email'AND fromdelete=0 AND draft=1 LIMIT $offset,$limit_per_page";
     $result=$this->connect_db->query($sql);
     $output= "";
     if(mysqli_num_rows($result) > 0){
@@ -386,7 +417,7 @@ public function pagination_draft($page,$data,$email){
         <tbody>";
         foreach($data as $key => $val){
             $output .= "<tr>
-            <td><input type='checkbox' value='".$val['id']."'></td>
+            <td><input type='checkbox' class='checkbox' name='message_draft' id='message_draft' value='".$val['id']."'></td>
             <td>".$val['to_send']."</td>
             <td>".$val['subject_line']."</td>
             <td>".$val['date_time']."</td>
@@ -406,7 +437,7 @@ public function pagination_draft($page,$data,$email){
   
       $output .='<div id="pagination">';
   
-      for($i=1; $i <= $total_pages; $i++){
+      for($i=1; $i <=3.5* $total_pages; $i++){
         if($i == $page){
           $class_name = "active";
         }else{
@@ -420,6 +451,55 @@ public function pagination_draft($page,$data,$email){
     }else{
       echo "<h2>No Record Found.</h2>";
     }
+}
+
+public function read($message,$email){
+   
+   
+        $sql="UPDATE email SET `read`=1 WHERE from_send = '$email' && id = '$message'";
+        $result = $this->connect_db->query($sql);
+        if($result){
+            echo "";
+
+        }
+        else{
+          echo  "";
+        }
+    
+
+
+
+}
+
+
+public function read_sent($message,$email){
+   
+   
+    $sql="UPDATE email SET `read`=1 WHERE from_send = '$email' && id = '$message'";
+    $result = $this->connect_db->query($sql);
+    if($result){
+        echo "";
+
+    }
+    else{
+      echo  "";
+    }
+
+}
+
+public function unread_sent($message,$email){
+   
+   
+    $sql="UPDATE email SET unread=1 WHERE from_send = '$email' && id = '$message'";
+    $result = $this->connect_db->query($sql);
+    if($result){
+        echo "";
+
+    }
+    else{
+      echo  "";
+    }
+
 }
 
 

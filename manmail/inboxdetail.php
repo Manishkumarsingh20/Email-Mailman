@@ -116,10 +116,10 @@ if ($_SESSION['login']) {
                                         <table class="table">
                                             <tbody>
                                                 <?php
-                                                $sql = $obj->inbox_data($_SESSION['email']);
+                                                // $sql = $obj->inbox_data($_SESSION['email']);
                                              
 
-                                                while ($row = mysqli_fetch_array($sql)) {
+                                                // while ($row = mysqli_fetch_array($sql)) {
                                                 ?>
                                                  
                                                       <tr onclick="window.location='sentdetail.php';">
@@ -130,7 +130,7 @@ if ($_SESSION['login']) {
                                                         
                                                     </tr>
                                                 <?php
-                                                }
+                                                // }
                                                 ?> 
                                             </tbody>
                                         </table>

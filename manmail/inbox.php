@@ -3,12 +3,18 @@ session_start();
 include_once "../php/dbconnect.php";
 $obj = new dbconnection;
 
-if (isset($_POST["submit"]) && $_POST["submit"] != "") {
+if(isset($_POST['read_msg'])){
+       $message=$_POST['message_inbox'];
+       $email = $_SESSION['email'];
+       $read=$obj->read($message,$email);
+}
+
+
+
+if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
+ 
     $email = $_SESSION['email'];
-    $message_id = $_POST['message_id'];
-    print_r($email);
-    die("00");
-    // print($email);
+    $message_id = $_POST['message_inbox'];
     $result = $obj->inbox_delete_data($email, $message_id);
 }
 if (isset($_POST['compose_msg_send'])) {
@@ -127,10 +133,13 @@ if ($_SESSION['login']) {
                 <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
                     <form name="frmUser" method="post">
                         <div class="row actio_bar m-4">
-                            <div>
+                        <div>
                                 <span class="mr-2">
                                     <input type="checkbox" name="" title="select all">
-                                    <input name="submit" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;" class="btn btn-outline-primary" id="hide" style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
+                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
+                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
+                                    <input type="submit"  name="read_msg" style="padding: 4px 11px 3px 14px;margin: -8px -149px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Read"></input>
+                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -230px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Unread"></input>
                             </div>
                             </span>
 
@@ -142,21 +151,30 @@ if ($_SESSION['login']) {
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <div class="card">
-                                    <h5 class="card-header">Inbox</h5>
+                                    <h5 class="card-header" >Inbox</h5>
                                     <div class="card-body">
                                         <div class="table-responsive removable-table">
                                             <table class="table" id="removetable">
                                                 <tbody>
+
                                                     <?php
                                                     $sql = $obj->inbox_data($_SESSION['email']);
 
 
                                                     while ($row = mysqli_fetch_array($sql)) {
+                                                        // print_r($row)  ;
+                                                       
+                                                        $class = "";
+                                                        if($row['read'] == 1){
+                                                            $class = "text-danger";
+                                                        }
                                                     ?>
 
-                                                        <tr>
-                                                            <td><input type="checkbox" name=""></td>
-                                                            <input type="text" name="message_id[]" id="message_id" value="<?php echo $row['id']; ?>">
+                                                        <tr id="color">
+                                                            
+                                                            <td><input type="checkbox" class="checkbox" name=""></td>
+                                                            <input type="hidden" name="message_inbox" id="message_inbox" value="<?php echo $row['id']; ?>">
+
                                                             <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send'] ?></td>
                                                             <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line'] ?></td>
                                                             <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time'] ?></td>
@@ -294,12 +312,12 @@ if ($_SESSION['login']) {
                 $('#searchdata').keyup(function(e) {
                     e.preventDefault();
                     var search = $('#searchdata').val();
-                //     $('#searchdata')(function() {
-                //     $('#removetable').empty();
-                // });
-                    
+                    //     $('#searchdata')(function() {
+                    //     $('#removetable').empty();
+                    // });
+
                     $.ajax({
-                      
+
                         type: "POST",
                         url: "../php/dbconnect.php",
                         dataType: 'json',
@@ -314,7 +332,7 @@ if ($_SESSION['login']) {
                             // console.log()
                             $.each(data, function(indexInArray, valueOfElement) {
 
-                                $('#removetable').append("<tr><td><input type='checkbox'></td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
+                                $('#removetable').append("<tr ><td><input type='checkbox'></td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
                             });
 
 
@@ -326,41 +344,56 @@ if ($_SESSION['login']) {
             });
         </script>
 
-<script>
-//pagination
-$(document).ready(function() {
-    function loadTable(page){
-      $.ajax({
-        url:"../php/dbconnect.php",
-        type: "POST",
-        data: {
-            'check_page_inbox': 1,
-            'page_no_inbox' :page },
-        success: function(data) {
-            var res = JSON.parse(data);
-            if(res.type == "pagination"){
-                // console.log(res.html)
-                // $("#removetable").html('');
-                $(".removable-table").html('');
-                $(".removable-table").append(res.html);
-            }
-        }
-      });
-    }
-    loadTable();
-    //Pagination Code
-    $(document).on("click","#pagination a",function(e) {
-      e.preventDefault();
-      var page_id = $(this).attr("id");
+        <script>
+            //pagination
+            $(document).ready(function() {
+                function loadTable(page) {
+                    $.ajax({
+                        url: "../php/dbconnect.php",
+                        type: "POST",
+                        data: {
+                            'check_page_inbox': 1,
+                            'page_no_inbox': page
+                        },
+                        success: function(data) {
+                            var res = JSON.parse(data);
+                            if (res.type == "pagination") {
+                                // console.log(res.html)
+                                // $("#removetable").html('');
+                                $(".removable-table").html('');
+                                $(".removable-table").append(res.html);
+                            }
+                        }
+                    });
+                }
+                loadTable();
+                //Pagination Code
+                $(document).on("click", "#pagination a", function(e) {
+                    e.preventDefault();
+                    var page_id = $(this).attr("id");
 
-      loadTable(page_id);
-    })
-  });
+                    loadTable(page_id);
+                })
+            });
+        </script>
+<script>
+
+        $(document).on("click", ".checkbox", function () {
+            if ($("input[type=checkbox]").is(":checked")) {
+            
+
+                $(".hide").removeClass("d-none");
+                
+            } else {
+                $(".hide").addClass("d-none");
+                
+            }
+        });
+   
+
 </script>
 
-
-
-
+        <!-- <script src="../js1/checkbox.js"></script> -->
         <script src="../js1/compose.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
