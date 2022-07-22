@@ -288,11 +288,8 @@ public function pagination_sent($page,$data,$email){
         $output .= " <table class='table' id='removetable'>
         <tbody>";
         foreach($data as $key => $val){
-            $class = "";
-            if($val['read'] == 0){
-                $class = "font-weight : bold";
-            }
-            $output .= "<tr style='" . $class . "'>
+           
+            $output .= "<tr>
             <td><input type='checkbox'class='checkbox' name='message_sent' id='message_sent' value='".$val['id']."'></td>
             <td>".$val['to_send']."</td>
             <td>".$val['subject_line']."</td>
