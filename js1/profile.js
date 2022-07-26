@@ -7,33 +7,31 @@ function myvalidation() {
     }
     else {
         firstname1.style.border = "2px solid red";
-
     }
 
+////////////////////////////////////////////////////////////////////////////////
 
+var re = document.getElementById("remail1").value;
+var recoveryemail1 = document.getElementById("remail1");
+var recov = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+if (re.match(recov)) {
+    recoveryemail1.style.border = "2px solid green";
+} else {
+    recoveryemail1.style.border = "2px solid red";
+}
 
-    // ********
+/////////////////////////////////////////////////////////////////////////////////
 
-    var re = document.getElementById("remail1").value;
-    var recoveryemail1 = document.getElementById("remail1");
-    var recov = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
-    if (re.match(recov)) {
-        recoveryemail1.style.border = "2px solid green";
-    } else {
-        recoveryemail1.style.border = "2px solid red";
-    }
-    // **********
+var re = document.getElementById("rema").value;
+var recoveryemail1 = document.getElementById("rema");
+var recov = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+if (re.match(recov)) {
+    recoveryemail1.style.border = "2px solid green";
+} else {
+    recoveryemail1.style.border = "2px solid red";
+}
 
-    var re = document.getElementById("rema").value;
-    var recoveryemail1 = document.getElementById("rema");
-    var recov = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
-    if (re.match(recov)) {
-        recoveryemail1.style.border = "2px solid green";
-    } else {
-        recoveryemail1.style.border = "2px solid red";
-    }
-
-    // ************************
+/////////////////////////////////////////////////////////////////////////////////////
 
     var username = document.getElementById("tom").value;
     var username1 = document.getElementById("tom");

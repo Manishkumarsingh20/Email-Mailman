@@ -17,8 +17,6 @@ class Databases
           $psss = $_POST['password'];
           $this->check_login($user, $psss);
      }
-
-
      public function check_login($emailusername, $password)
      {
           $password = $password;
@@ -36,30 +34,22 @@ class Databases
                $_SESSION['lastname'] = $user_data['lastname'];
                $_SESSION['secondemail'] = $user_data['secondemail'];
                $_SESSION['email'] = $user_data['email'];
-               
-               
-
                header('location:../manmail/dashboard.php');
                return  true;
           } else {
-               
-               $_SESSION['login']="Could't find your Mailman Account//please check your Username/Email or password";
-               
+               $_SESSION['login'] = "Could't find your Mailman Account//please check your Username/Email or password";
                return header('location:../manmail/login.php');
                false;
           }
      }
      public function get_session()
      {
-
           return $_SESSION['login'];
      }
 
      public function user_logout()
      {
-
           $_SESSION['login'] = FALSE;
-
           session_destroy();
      }
 }

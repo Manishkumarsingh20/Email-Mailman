@@ -9,16 +9,18 @@ if ($_SESSION['login']) {
     if (isset($_POST['submit'])) {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
+        $middlename = $_POST['middlename'];
         $time = date('Y-m-d H:i:s');
         $secondemail = $_POST['recoveryemail'];
         $picture = $_FILES['picture']['name'];
         $name_image_temp = $_FILES['picture']['tmp_name'];
         move_uploaded_file($name_image_temp, "../images/" . $picture);
-        $result = $obj->update($firstname, $lastname, $secondemail, $picture, $time);
+        $result = $obj->update($firstname, $lastname,  $middlename, $secondemail, $picture, $time);
     }
 
 
     $get_result = $obj->select($_SESSION['id']);
+
 
     if (isset($_POST['delete'])) {
         $picture = $_POST['picture'];
@@ -78,8 +80,8 @@ if ($_SESSION['login']) {
         </nav>
         <section class="Form my-2 mx-5">
             <div class="container">
+                <a href="profile.php"> <button type="button" style="padding: 7px 5px 7px 5px;" class="btn btn-danger">Back to Profile</button></a>
                 <div class="row no-gutters">
-
                     <form class="" method="post" enctype='multipart/form-data'>
                         <div class="row align-items-center">
                             <div class="col-sm-6 pt-5 px-5">
@@ -114,9 +116,9 @@ if ($_SESSION['login']) {
 
                                 <div class="mt-3 iprofileimf">
                                     <span><button type="submit" name="delete" class="btn btn-outline-danger" style="padding:5px 5px 5px 5px ;width:94px"><a href="profileupload.php?updateid=<?php echo $_SESSION['id'] ?>">Delete</a></button></span>
-                                    <input type="file" class="type" name="picture">
+                                    <input type="file" class="type" id="file" onchange="return validationstart()" name="picture">
+                                    <p id="pictures"></p>
                                     <img src="../images/<?php echo $_SESSION['picture'] ?>" alt="" class="" style="width:300px">
-
                                 </div>
                             </div>
                         </div>
@@ -130,9 +132,7 @@ if ($_SESSION['login']) {
         <?php
 
         if (isset($_SESSION['update']) && $_SESSION['update'] != '') {
-
         ?>
-
             <script>
                 swal({
                     title: "<?php echo $_SESSION['update']  ?>",
@@ -144,9 +144,9 @@ if ($_SESSION['login']) {
         <?php
             unset($_SESSION['update']);
         }
-
-
         ?>
+
+        <!-- ---------------------------------------------------------------------------------------- -->
 
 
         <?php
@@ -169,6 +169,8 @@ if ($_SESSION['login']) {
 
 
         ?>
+
+        <!-- ----------------------------------------------------------------------------------- -->
 
 
 

@@ -9,8 +9,8 @@ function myvalidation() {
         firstname1.style.border = "2px solid red";
 
     }
+////////////////////////////////////////////////////////////////////////////////////
 
-    //*********************************
     var firstname = document.getElementById("m1").value;
     var firstname1 = document.getElementById("m1");
     var letters = /^[A-Za-z]+$/;
@@ -22,8 +22,8 @@ function myvalidation() {
     }
 
 
+////////////////////////////////////////////////////////////////////////////////////
 
-    //****************************
     var firstname = document.getElementById("l1").value;
     var firstname1 = document.getElementById("l1");
     var letters = /^[A-Za-z]+$/;
@@ -34,7 +34,7 @@ function myvalidation() {
         firstname1.style.border = "2px solid red";
     }
 
-    //*****************************
+///////////////////////////////////////////////////////////////////////////////////////
 
     var re = document.getElementById("remail").value;
     var recoveryemail1 = document.getElementById("remail");

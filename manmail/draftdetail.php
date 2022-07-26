@@ -5,8 +5,6 @@ $obj = new dbconnection;
 if ($_SESSION['login']) {
 ?>
 
-
-
 <!doctype html>
     <html lang="en">
 
@@ -39,7 +37,6 @@ if ($_SESSION['login']) {
                 </div>
             </div>
             <div class="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-end mt-md-8">
-
                 <div class="mr-3 mt-1">
                 </div>
                 <div class="dropdown">
@@ -99,10 +96,7 @@ if ($_SESSION['login']) {
                                      style="padding: 5px 9px 9px 6px " type="submit" value="Delete"></input>
                             </div>
                         </span>
-
-
                         <div class="d-grid gap-2 d-md-block">
-
                         </div>
                     </div>
                     <div class="row">
@@ -117,17 +111,11 @@ if ($_SESSION['login']) {
                                             <tbody>
                                                 <?php
                                                 $sql = $obj->inbox_data($_SESSION['email']);
-                                             
-
                                                 while ($row = mysqli_fetch_array($sql)) {
                                                 ?>
-                                                 
                                                       <tr onclick="window.location='sentdetail.php';">
-                                                        
                                                         <input type="hidden" name="message_id[]" id="message_id" value="<?php  echo $row['id'];?>">
                                                         <td><?php echo $row['messsage_send']?></td>
-                                                       
-                                                        
                                                     </tr>
                                                 <?php
                                                 }
@@ -137,9 +125,8 @@ if ($_SESSION['login']) {
 
                                     </div>
                                 </div>
-
                             </div>
-                            </form>
+                          </form>
                 </main>
             </div>
         </div>

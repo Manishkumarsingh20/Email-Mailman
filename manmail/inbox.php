@@ -3,55 +3,61 @@ session_start();
 include_once "../php/dbconnect.php";
 $obj = new dbconnection;
 
-if(isset($_POST['read_msg'])){
-       $message=$_POST['message_inbox'];
-       $email = $_SESSION['email'];
-       $read=$obj->read($message,$email);
-}
-
-if(isset($_POST['unread_msg'])){
-    $message=$_POST['message_inbox'];
-    $email = $_SESSION['email'];
-    $read=$obj->unread_msg($message,$email);
-}
-
-
-if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
- 
-    $email = $_SESSION['email'];
-    $message_id = $_POST['message_inbox'];
-    $result = $obj->inbox_delete_data($email, $message_id);
-}
-if (isset($_POST['compose_msg_send'])) {
-
-    $to = $_POST['to'];
-    $from = $_SESSION['email'];
-    $subject = $_POST['subject'];
-    $cc = $_POST['cc'];
-    $bcc = $_POST['bcc'];
-    $message = $_POST['message'];
-    $attachement = $_FILES['pictures']['name'];
-    $name_image_temp = $_FILES['pictures']['tmp_name'];
-    move_uploaded_file($name_image_temp, "../images/" . $attachement);
-    $query_insert = $obj->insert_compose($to, $from, $subject, $cc, $bcc, $message, $attachement);
-}
-if (isset($_POST['draft'])) {
-    //   echo "<pre>"; 
-    //     print_r(($_POST)); die("kk");
-    $to = $_POST['to'];
-    $from = $_SESSION['email'];
-    $subject = $_POST['subject'];
-    $cc = $_POST['cc'];
-    $bcc = $_POST['bcc'];
-    $message = $_POST['message'];
-    $attachement = $_FILES['pictures']['name'];
-    $name_image_temp = $_FILES['pictures']['tmp_name'];
-    move_uploaded_file($name_image_temp, "../images/" . $attachement);
-    $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
-}
-
-
 if ($_SESSION['login']) {
+    if (isset($_POST["delete_all"]) && $_POST["delete_all"] != "") {
+        $email = $_SESSION['email'];
+        $result = $obj->deleteall_inbox($email);
+    }
+
+    if (isset($_POST['read_msg'])) {
+        $message = $_POST['message_inbox'];
+        $email = $_SESSION['email'];
+        $read = $obj->read($message, $email);
+    }
+
+    if (isset($_POST['unread_msg'])) {
+        $message = $_POST['message_inbox'];
+        $email = $_SESSION['email'];
+        $read = $obj->unread_msg($message, $email);
+    }
+
+    if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
+
+        $email = $_SESSION['email'];
+        $message_id = $_POST['message_inbox'];
+        $result = $obj->inbox_delete_data($email, $message_id);
+    }
+
+    if (isset($_POST['compose_msg_send'])) {
+
+        $to = $_POST['to'];
+        $from = $_SESSION['email'];
+        $subject = $_POST['subject'];
+        $cc = $_POST['cc'];
+        $bcc = $_POST['bcc'];
+        $message = $_POST['message'];
+        $attachement = $_FILES['pictures']['name'];
+        $name_image_temp = $_FILES['pictures']['tmp_name'];
+        move_uploaded_file($name_image_temp, "../images/" . $attachement);
+        $query_insert = $obj->insert_compose($to, $from, $subject, $cc, $bcc, $message, $attachement);
+    }
+    if (isset($_POST['draft'])) {
+        //   echo "<pre>"; 
+        //     print_r(($_POST)); die("kk");
+        $to = $_POST['to'];
+        $from = $_SESSION['email'];
+        $subject = $_POST['subject'];
+        $cc = $_POST['cc'];
+        $bcc = $_POST['bcc'];
+        $message = $_POST['message'];
+        $attachement = $_FILES['pictures']['name'];
+        $name_image_temp = $_FILES['pictures']['tmp_name'];
+        move_uploaded_file($name_image_temp, "../images/" . $attachement);
+        $query_insert = $obj->insert_draft($to, $from, $subject, $cc, $bcc, $message, $attachement);
+    }
+
+
+
 
 ?>
     <!doctype html>
@@ -109,7 +115,7 @@ if ($_SESSION['login']) {
                     <div class="position-sticky">
                         <ul class="nav flex-column">
                             <li class="compose">
-                                <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a href="dashboard.php?composeid=<?php echo $_SESSION['id'] ?>">Compose</a></button>
+                                <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Compose</button>
                             </li>
                             <li class="nav-item mt-2">
                                 <a class="nav-link" href="inbox.php">
@@ -135,28 +141,25 @@ if ($_SESSION['login']) {
                     </div>
                 </nav>
 
-                <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
+                <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4 message_details">
                     <form name="frmUser" method="post">
                         <div class="row actio_bar m-4">
-                        <div>
+                            <div>
                                 <span class="mr-2">
-                                    <input type="checkbox" name="" title="select all">
-                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
-                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
-                                    <input type="submit"  name="read_msg" style="padding: 4px 11px 3px 14px;margin: -8px -149px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Read"></input>
-                                    <input type="submit"  name="unread_msg" style="padding: 4px 11px 3px 14px;margin: -8px -230px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Unread"></input>
+                                    <input type="checkbox" class="checkbox_all" id="select_all" name="" title="select all">
+                                    <input type="submit" name="delete_all" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none showhide" value="Delete"></input>
+                                    <input type="submit" name="submit_sent" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none hide" value="Delete"></input>
+                                    <input type="submit" name="read_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-success d-none hide" value="Read"></input>
+                                    <input type="submit" name="unread_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-secondary d-none hide" value="Unread"></input>
+                                </span>
                             </div>
-                            </span>
-
-
                             <div class="d-grid gap-2 d-md-block">
-
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 mb-3">
                                 <div class="card">
-                                    <h5 class="card-header" >Inbox</h5>
+                                    <h5 class="card-header">Inbox</h5>
                                     <div class="card-body">
                                         <div class="table-responsive removable-table">
                                             <table class="table" id="removetable">
@@ -164,40 +167,37 @@ if ($_SESSION['login']) {
 
                                                     <?php
                                                     $sql = $obj->inbox_data($_SESSION['email']);
-
-
                                                     while ($row = mysqli_fetch_array($sql)) {
                                                         // print_r($row)  ;
-                                                       
+
                                                         $class = "";
-                                                        if($row['read'] == 1){
+                                                        if ($row['read'] == 1) {
                                                             $class = "text-danger";
+                                                        } else {
+                                                            $class = "font-weight:bold";
                                                         }
                                                     ?>
-
                                                         <tr id="color">
-                                                            
                                                             <td><input type="checkbox" class="checkbox" name=""></td>
                                                             <input type="hidden" name="message_inbox" id="message_inbox" value="<?php echo $row['id']; ?>">
-
-                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['from_send'] ?></td>
-                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['subject_line'] ?></td>
-                                                            <td onclick="window.location='sentdetail.php';"><?php echo $row['date_time'] ?></td>
+                                                            <td class="col-4"><?php echo $row['from_send'] ?></td>
+                                                            <td class="col-4"><?php echo $row['subject_line'] ?></td>
+                                                            <td class="col-4"><?php echo $row['date_time'] ?></td>
                                                         </tr>
                                                     <?php
                                                     }
                                                     ?>
                                                 </tbody>
-                                            </table>
 
+                                            </table>
                                         </div>
                                     </div>
-
                                 </div>
                     </form>
                 </main>
             </div>
         </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -208,63 +208,38 @@ if ($_SESSION['login']) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
-
-
                         <section class="form">
-
-
                             <div class="container-fluid py-2 mt-5">
-
-
-
                                 <form class="form1" method="post" enctype='multipart/form-data'>
-
-
                                     <div class="py-2">
-
                                         <input type="email" name="to" id="email" onchange="return validation()" class="form-control" placeholder="Enter you email">
                                     </div>
-
                                     <div class="py-2">
-
                                         <input type="text" name="subject" id="sub" onchange="return validation()" class="form-control" placeholder="Subject">
                                     </div>
-
                                     <div class="py-2">
                                         <input type="text" name="cc" class="form-control" placeholder="CC">
                                     </div>
-
                                     <div class=" py-2">
                                         <input type="text" name="bcc" class="form-control" placeholder="BCC">
                                     </div>
-
-
                                     <div class="py-2">
-
                                         <textarea class="form-control" name="message" onchange="return validation()" placeholder="Message body" name="" id="" cols="100" rows="10"></textarea>
                                     </div>
                                     </fieldset>
-
-
-
                             </div>
                         </section>
                     </div>
                     <div class="modal-footer">
                         <input type="file" name="pictures">
-                        <button type="submit" class="btn btn-secondary" name="draft" value="close" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
+                        <button type="submit" class="btn btn-danger" style="padding: 5px 10px 5px 10px;" name="draft" value="close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" style="padding: 5px 10px 5px 10px;" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-
         </script>
-
-
-
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <?php
@@ -272,7 +247,6 @@ if ($_SESSION['login']) {
         if (isset($_SESSION['Compose']) && $_SESSION['Compose'] != '') {
 
         ?>
-
             <script>
                 swal({
                     title: "<?php echo $_SESSION['Compose']  ?>",
@@ -285,9 +259,31 @@ if ($_SESSION['login']) {
             unset($_SESSION['Compose']);
         }
 
-
         ?>
-        </script>
+
+
+
+<?php
+
+if (isset($_SESSION['inbox_delete']) && $_SESSION['inbox_delete'] != '') {
+
+?>
+    <script>
+        swal({
+            title: "<?php echo $_SESSION['inbox_delete']  ?>",
+            text: "",
+            icon: "<?php echo $_SESSION['inbox_code']  ?>",
+            button: "Ok Done",
+        });
+    </script>
+<?php
+    unset($_SESSION['inbox_delete']);
+}
+
+?>
+        
+
+ <!-- --------------------------------------------------------------------------------------------------------- -->
 
         <?php
 
@@ -310,6 +306,33 @@ if ($_SESSION['login']) {
 
         ?>
 
+
+
+
+
+<?php
+
+if (isset($_SESSION['deleteall_inbox']) && $_SESSION['deleteall_inbox'] != '') {
+
+?>
+
+    <script>
+        swal({
+            title: "<?php echo $_SESSION['deleteall_inbox']  ?>",
+            text: "",
+            icon: "<?php echo $_SESSION['delete_code']  ?>",
+            button: "Ok Done",
+        });
+    </script>
+<?php
+    unset($_SESSION['deleteall_inbox']);
+}
+
+
+?>
+    <!-- -------------------------------------------------------------------------------------------------------------------------- -->
+
+
         <script>
             $(document).ready(function() {
 
@@ -322,7 +345,6 @@ if ($_SESSION['login']) {
                     // });
 
                     $.ajax({
-
                         type: "POST",
                         url: "../php/dbconnect.php",
                         dataType: 'json',
@@ -330,25 +352,20 @@ if ($_SESSION['login']) {
                             'check_search': 1,
                             'search': search,
                         },
-
                         success: function(data) {
                             console.log(data);
                             // $('#removetable').empty();
                             // console.log()
                             $.each(data, function(indexInArray, valueOfElement) {
-
                                 $('#removetable').append("<tr ><td><input type='checkbox'></td><td>" + valueOfElement['to_send'] + "</td><td>" + valueOfElement['subject_line'] + "</td><td>" + valueOfElement['date_time'] + "</td></tr>");
                             });
-
-
-
-
                         }
                     });
                 });
             });
         </script>
 
+<!--  ------------------------------------------------------------------------------------------------------------------------------------------>
         <script>
             //pagination
             $(document).ready(function() {
@@ -381,24 +398,95 @@ if ($_SESSION['login']) {
                 })
             });
         </script>
-<script>
 
-        $(document).on("click", ".checkbox", function () {
-            if ($("input[type=checkbox]").is(":checked")) {
-            
+<!-- ------------------------------------------------------------------------------------------------------------------------------- -->
 
-                $(".hide").removeClass("d-none");
-                
-            } else {
-                $(".hide").addClass("d-none");
-                
-            }
-        });
-   
+        <script>
+            $(document).on("click", ".checkbox", function() {
+                if ($("input[type=checkbox]").is(":checked")) {
+                    $(".hide").removeClass("d-none");
+                } else {
+                    $(".hide").addClass("d-none");
+                }
+            });
+        </script>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
 
-</script>
+        <script>
+            $(document).on("click", ".checkbox_all", function() {
+                if ($("#select_all").is(":checked")) {
+                    $(".showhide").removeClass("d-none");
+                } else {
+                    $(".showhide").addClass("d-none");
+                }
 
-        <!-- <script src="../js1/checkbox.js"></script> -->
+            });
+        </script>
+
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+
+        <script>
+            $(document).ready(function() {
+                $('#select_all').on('click', function() {
+                    if (this.checked) {
+                        $('.checkbox').each(function() {
+                            this.checked = true;
+                        });
+                    } else {
+                        $('.checkbox').each(function() {
+                            this.checked = false;
+                        });
+                    }
+                });
+                $('.checkbox').on('click', function() {
+                    if ($('.checkbox:checked').length == $('.checkbox').length) {
+                        $('#select_all').prop('checked', true);
+                        $()
+                    } else {
+                        $('#select_all').prop('checked', false);
+                    }
+                });
+            });
+        </script>
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+        <script>
+            $(document).on("click", ".mesaagedetail", function() {
+                let message_id = $(this).attr('dataid')
+                $.ajax({
+                    type: "POST",
+                    url: "../php/dbconnect.php",
+                    data: {
+                        'check_detail_inbox': 1,
+                        'message_id': message_id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                        var html = "<h1>Mailing Subject</h1>";
+                        html += "<h5 style='color:blue'>Participants  </h5>";
+                        html += "<div style='font-size:20px'>Date : " + response[0]['date_time'] + "</div>";
+                        html += "<div> Subject:" + response[0]['subject_line'] + "</div>"
+                        html += "<div> Email:" + response[0]['to_send'] + "</div>";
+                        html += "<div> CC:" + response[0]['cc'] + "</div>";
+                        html += "<div> BCC:" + response[0]['bcc'] + "</div>";
+                        html += "<div> Message:" + response[0]['messsage_send'] + "</div>";
+                        html += "<div> Attachement:" + response[0]['attachement '] + "</div>";
+                        html += "<textarea style='width:600px;height:400px'></textarea>";
+                        html += "<div><button  style='padding: 1px 18px 1px 18px; background: blue;border-radius: 10px;'>Reply</button></div>";
+                        html += "<br>";
+                        html += "<div><button style='padding: 1px 18px 1px 18px; background: blue;border-radius: 10px;' >Reply ALL</button></div>";
+                        $('.message_details').html(html)
+                    }
+                });
+            })
+        </script>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+        
         <script src="../js1/compose.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

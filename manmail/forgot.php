@@ -3,7 +3,6 @@
 //     header("location:forgot.php");
 // }
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -22,7 +21,6 @@
                 <form method="post" class="col-6" action="../php/forgotpassword.php">
                     <div class="col-9">
                         <label class="my-2">Enter Your Registered Email</label>
-
                         <input type="text" name="email" class="form-control" placeholder="abc@.com"  onchange=" return validation()"id="emailconfirm">
                         <h6 class="my-2"><a href="login.php">Back to login</a></h6>
                         <button type="submit"  id="button"class="btn btn-outline-primary" name="reset" onclick=" return validation()">Sent Mail</button>

@@ -3,6 +3,7 @@
 
 if (isset($_POST['reset_code'])) {
     $code = $_POST['reset_code'];
+    // $password=$_POST['oldpass'];
     $conn = new mySqli('localhost', 'tse', 'bPmtHasjyTJ2SgZJ', 'manish');
     if ($conn->connect_error) {
         die('Could not connect to the database');

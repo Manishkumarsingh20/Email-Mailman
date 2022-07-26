@@ -4,7 +4,6 @@ session_start();
 ?>
 
 <!doctype html>
-
 <html lang="en">
 
 <head>
@@ -15,12 +14,12 @@ session_start();
     <link rel="stylesheet" href="../css1/login.css">
 </head>
 <style>
- #login{
-    color:red;
-    font-size:13px;
- }
-
+    #login {
+        color: red;
+        font-size: 13px;
+    }
 </style>
+
 <body class="mt-5">
     <section class="Form my-4 mx-5">
         <div class="container">
@@ -36,25 +35,24 @@ session_start();
                         <div class="form-row">
                             <div class="">
                                 <label>Email</label>
-                                <input type="text" class="form-control myy-3" onchange="return myvalidation()"   name="username" placeholder="Email/Username" id="remail1">
+                                <input type="text" class="form-control myy-3" onchange="return myvalidation()" name="username" placeholder="Email/Username" id="remail1">
                                 <span id="login"><?php echo  $_SESSION['login'] ?></span>
-                        </div>
-                        <div class="form-row">
-                            <div class="">
-                                <label>Password</label>
-                                <input type="password"  class="form-control my-3" onchange="return myvalidation()"   name="password" placeholder="Enter Password" id="cp1">
-                                <span id="passwordmatch"></span>
                             </div>
-
-                        </div>
-                        <div class="form-row d-flex justify-content-between">
-                            <div>
-                                <a class="" href="forgot.php">Forgot Password</a>
+                            <div class="form-row">
+                                <div class="">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control my-3" onchange="return myvalidation()" name="password" placeholder="Enter Password" id="cp1">
+                                    <span id="passwordmatch"></span>
+                                </div>
                             </div>
-                            <div class="">
-                                <button type="submit" name="submit" onclick="return myvalidation() "   name="login" class="btn btn-outline-primary">Login</button>
+                            <div class="form-row d-flex justify-content-between">
+                                <div>
+                                    <a class="" href="forgot.php">Forgot Password</a>
+                                </div>
+                                <div class="">
+                                    <button type="submit" name="submit" onclick="return myvalidation() " name="login" class="btn btn-outline-primary">Login</button>
+                                </div>
                             </div>
-                        </div>
                     </form>
                     <p>Don't have an account yet?</p>
                     <a href="signup.php">Create One</a>
@@ -62,35 +60,29 @@ session_start();
             </div>
         </div>
     </section>
-
-</script>
-
-
-
+    </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<?php
+    <?php
 
-if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-{
+    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
 
     ?>
 
-<script>swal({
-  title: "<?php echo $_SESSION['status']  ?>",
-  text: "Please press ok to go to login Page!",
-  icon: "<?php echo $_SESSION['status_code']  ?>",
-  button: "Ok Done",
-}); 
-</script>
+        <script>
+            swal({
+                title: "<?php echo $_SESSION['status']  ?>",
+                text: "Please press ok to go to login Page!",
+                icon: "<?php echo $_SESSION['status_code']  ?>",
+                button: "Ok Done",
+            });
+        </script>
     <?php
-unset($_SESSION['status']);
+        unset($_SESSION['status']);
+    }
 
-}
 
-
-?>
-
+    ?>
     <script src="../js1/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>

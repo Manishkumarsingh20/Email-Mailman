@@ -1,7 +1,6 @@
 <?php
 class DB
 {
-
 	protected $db_name = 'manish';
 	protected $db_user = 'tse';
 	protected $db_pass = 'bPmtHasjyTJ2SgZJ';
@@ -33,6 +32,3 @@ class DB
 		header("location:" . $url);
 	}
 }
-
-
-?>

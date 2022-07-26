@@ -5,13 +5,9 @@ session_start();
 if ($_SESSION['login']) {
     $db = new dbconnection;
     $result = $db->getoneelement($_SESSION['id']);
-
-
 ?>
-
     <!doctype html>
     <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +16,6 @@ if ($_SESSION['login']) {
         <link rel="stylesheet" href="../css1/login.css">
         <link rel="stylesheet" href="../css1/dashboard.css">
     </head>
-
     <body class="">
         <nav class="navbar navbar-light bg-info p-3">
             <div class="col-12 col-md-3 col-lg-3 mb-2 flex-wrap flex-md-nowrap d-flex justify-content-between">
@@ -34,13 +29,10 @@ if ($_SESSION['login']) {
             </div>
             <!-- //check -->
             <div class="col-lg-6 col-md-6 col-6">
-
-
                 <div class="input-group">
                     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <button type="button" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button>
                 </div>
-
             </div>
             <div class="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-end mt-md-8">
                 <div class="mr-3 mt-1">
@@ -63,8 +55,8 @@ if ($_SESSION['login']) {
         </nav>
         <section class="Form my-4 mx-5">
             <div class="container">
+               <a href="dashboard.php"> <button type="button" style="padding: 7px 5px 7px 5px;" class="btn btn-danger">Back to Dashboard</button></a>
                 <div class="row no-gutters">
-
                     <div class="col-sm-6 pt-5 px-5">
                         <h2 class="font-weight-bold py-2">Mailman</h2>
                         <form class="" method="post">
@@ -95,13 +87,12 @@ if ($_SESSION['login']) {
                         </form>
                     </div>
                     <div class="col-sm-6 mt-3">
-                        <img src="../images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="" class="img-fluid">
+                        <img src="../images/<?php echo $_SESSION['picture'] ?>" style="width:300px" alt="" class="img-fluid my-5">
                     </div>
                     <a class="col-sm-6" href="profileupload.php?updateid=<?= $result['id'] ?>">Edit Profile</a> <a href="changeoldpassword.php?changeoldpasswordid=<?= $result['id'] ?>">Change password</a>
                 </div>
             </div>
         </section>
-
         <script src="../js1/profile.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>

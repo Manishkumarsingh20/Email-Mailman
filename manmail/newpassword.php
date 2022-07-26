@@ -42,7 +42,6 @@ if(empty($_GET['code']) && !isset($_SESSION['id'])){
                                     <button type="submit"  id="button" class="btn btn-outline-primary" onclick=" return validation()" name="change">
                                         Submit</button>
                                 </div>
-                                <!-- <div id="write"></div> -->
                             </div>
                             <div class="col-sm-6 py-5 ">
                                 <img src="../img1/locker.png" alt="">
@@ -57,9 +56,7 @@ if(empty($_GET['code']) && !isset($_SESSION['id'])){
     <script src="../js1/changepassword.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
 </body>
-
 </html>
  <?php
 

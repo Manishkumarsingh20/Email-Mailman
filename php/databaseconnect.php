@@ -20,5 +20,3 @@
 }
 
 $db=new dbconnection();
-
-?>

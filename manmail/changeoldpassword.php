@@ -1,17 +1,14 @@
 <?php
 
 session_start();
-
 include_once "../php/dbconnect.php";
 
 $obj = new dbconnection;
 if ($_SESSION['login']) {
-
     if (isset($_POST['changetonew'])) {
         $oldpassword = $_POST['oldpass'];
         $confirm_passowrd_entery = $_POST['confirm_password'];
         $newconfirmpassword = $_POST['new_password'];
-        
         $fetch_data = $obj->old_password_match($oldpassword, $confirm_passowrd_entery, $newconfirmpassword);
     }
 ?>
@@ -28,8 +25,6 @@ if ($_SESSION['login']) {
         <link rel="stylesheet" href="../css1/dashboard.css">
     </head>
 
-
-   
     <body>
         <nav class="navbar navbar-light bg-info p-3">
             <div class="col-12 col-md-3 col-lg-3 mb-2 flex-wrap flex-md-nowrap d-flex justify-content-between">
@@ -66,28 +61,26 @@ if ($_SESSION['login']) {
             </div>
             </div>
         </nav>
-
         <section class="Form my-4 mx-5">
             <div class="container">
+                <a href="profileupload.php"> <button type="button" style="padding: 7px 5px 7px 5px;" class="btn btn-danger">Back to Profileupload</button></a>
                 <div class="row no-gutters">
                     <div class="col-lg-5 mt-3">
                         <h2 class="font-weight-bold py-2"><span class="Yellow">Mailman</span></h2>
                         <form class="" action="" method="post">
                             <div class="row">
                                 <div class="col-sm-6">
-
                                     <div class="">
-                                        <input type="password" name="oldpass" class="form-control my-3 icon" onchange=" return validation()" placeholder="Type old password" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
+                                        <input type="password" name="oldpass" class="form-control my-3 icon oldpass" onchange=" return validation()" placeholder="Type old password" id="pass1"> <span> <i class="fa-solid fa-question"></i></span>
+                                        <span class="oldpassword"></span>
                                     </div>
                                     <div class="">
-                                        <input type="password"  name="confirm_password" class="form-control my-3" onchange=" return validation()"placeholder="Confirm password"id="cp1">
+                                        <input type="password" name="confirm_password" class="form-control my-3" onchange=" return validation()" placeholder="Confirm password" id="cp1">
                                         <span id="write" style="color:red"></span>
                                     </div>
                                     <div class="">
-                                        <input type="password"   name="new_password" class="form-control my-3" onchange=" return validation()"  placeholder="Type new password" id="newpassword">
-                                        
+                                        <input type="password" name="new_password" class="form-control my-3" onchange=" return validation()" placeholder="Type new password" id="newpassword">
                                     </div>
-
                                     <div class="text-right">
                                         <button type="submit" id="button" class="btn btn-outline-primary" style="padding:5px 5px 5px 5px ;width:94px" onclick="return validation()" name="changetonew">
                                             Submit</button>
@@ -98,43 +91,32 @@ if ($_SESSION['login']) {
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </section>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="../js1/newpassword.js"></script>
     </body>
 
     </html>
-
-
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <?php
-
-        if (isset($_SESSION['password']) && $_SESSION['password'] != '') {
-
-        ?>
-
-            <script>
-                swal({
-                    title: "<?php echo $_SESSION['password']  ?>",
-                    text: "Please press ok to go Back",
-                    icon: "<?php echo $_SESSION['password_code']  ?>",
-                    button: "Ok Done",
-                });
-            </script>
-        <?php
-            unset($_SESSION['password_code']);
-        }
-
-
-        ?>
-
-
+    <?php
+    if (isset($_SESSION['password']) && $_SESSION['password'] != '') {
+    ?>
+        <script>
+            swal({
+                title: "<?php echo $_SESSION['password']  ?>",
+                text: "Please press ok to go Back",
+                icon: "<?php echo $_SESSION['password_code']  ?>",
+                button: "Ok Done",
+            });
+        </script>
+    <?php
+        unset($_SESSION['password_code']);
+    }
+    ?>
 <?php
 } else {
     header("location:login.php");

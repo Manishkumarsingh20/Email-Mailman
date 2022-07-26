@@ -1,29 +1,15 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include_once "../php/dbconnect.php";
 
 $obj = new dbconnection;
 
-// if(isset($_POST['read_msg'])){
-//     $message=$_POST['unread_msg'];
-//     $email = $_SESSION['email'];
-//     $read=$obj->read_sent($message,$email);
-// }
-
-
-// if(isset($_POST['read_msg'])){
-//     $message=$_POST['message_sent'];
-//     $email = $_SESSION['email'];
-//     $read=$obj->read_sent($message,$email);
-// }
-
-
+if (isset($_POST["delete_all"]) && $_POST["delete_all"] != "") {
+    $email = $_SESSION['email'];
+    $result = $obj->deleteall_sent($email);
+}
 // var_dump($_POST['submit']);
 if (isset($_POST["submit_sent"]) && $_POST["submit_sent"] != "") {
- 
+
     $email = $_SESSION['email'];
     $message_id = $_POST['message_sent'];
     $result = $obj->delete_data($email, $message_id);
@@ -73,8 +59,6 @@ if ($_SESSION['login']) {
         <link rel="stylesheet" href="../css1/dashboard.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-
     </head>
 
     <body>
@@ -119,26 +103,23 @@ if ($_SESSION['login']) {
                     <div class="position-sticky">
                         <ul class="nav flex-column">
                             <li class="compose">
-                                <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><a href="dashboard.php?composeid=<?php echo $_SESSION['id'] ?>">Compose</a></button>
+                                <a href="dashboard.php"><button class=" btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Compose</button></a>
                             </li>
                             <li class="nav-item mt-2">
                                 <a class="nav-link" href="inbox.php">
                                     <span class="ml-2">Inbox</span>
                                 </a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" href="sent.php">
                                     <span class="ml-2" name="sent_msg">Sent</span>
                                 </a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" href="draft.php">
                                     <span class="ml-2">Draft</span>
                                 </a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link" href="trash.php">
                                     <span class="ml-2">Trash</span>
@@ -148,15 +129,14 @@ if ($_SESSION['login']) {
                     </div>
                 </nav>
 
-                <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4">
+                <main class="col-lg-10 col-md-9 ml-sm-auto px-md-4 py-4 message_details">
                     <form name="frmUser" method="post">
                         <div class="row actio_bar m-4">
                             <div>
                                 <span class="mr-2">
-                                    <input type="checkbox" name="" title="select all">
-                                    <input type="submit"  name="submit_sent" style="padding: 4px 11px 3px 14px;margin: -8px -87px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Delete"></input>
-                                    <input type="submit"  name="read_msg" style="padding: 4px 11px 3px 14px;margin: -8px -149px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Read"></input>
-                                    <input type="submit"  name="unread_msg" style="padding: 4px 11px 3px 14px;margin: -8px -230px 0px 49px; position: absolute;right: 1076px;padding: 5px 9px 9px 6px  " class="btn btn-outline-primary d-none hide" value="Unread"></input>
+                                    <input type="checkbox" class="checkbox_all" id="select_all" name="" title="select all">
+                                    <input type="submit" name="delete_all" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none showhide" value="Delete"></input>
+                                    <input type="submit" name="submit_sent" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none hide" value="Delete"></input>
                             </div>
                             </span>
                             <div class="d-grid gap-2 d-md-block">
@@ -175,16 +155,16 @@ if ($_SESSION['login']) {
                                                     $sql = $obj->fetchdata($_SESSION['email']);
 
                                                     while ($row = mysqli_fetch_array($sql)) {
-                                                        
+
                                                     ?>
                                                         <tr>
                                                             <td>
                                                             <td><input type="checkbox" class="checkbox" name=""></td>
                                                             <input type="hidden" name="message_sent" id="message_sent" value="<?php echo $row['id']; ?>">
                                                             </td>
-                                                            <td onclick="window.location='inboxdetail.php';"><?php echo $row['to_send'] ?></td>
-                                                            <td onclick="window.location='inboxdetail.php';"><?php echo $row['subject_line'] ?></td>
-                                                            <td onclick="window.location='inboxdetail.php';"><?php echo $row['date_time'] ?></td>
+                                                            <td class="col-4" onclick="window.location='inboxdetail.php';"><?php echo $row['to_send'] ?></td>
+                                                            <td class="col-4" onclick="window.location='inboxdetail.php';"><?php echo $row['subject_line'] ?></td>
+                                                            <td class="col-4" onclick="window.location='inboxdetail.php';"><?php echo $row['date_time'] ?></td>
                                                         </tr>
                                                     <?php
                                                     }
@@ -206,29 +186,15 @@ if ($_SESSION['login']) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
-
-
                         <section class="form">
-
-
                             <div class="container-fluid py-2 mt-5">
-
-
-
                                 <form class="form1" method="post" enctype='multipart/form-data'>
-
-
                                     <div class="py-2">
-
                                         <input type="email" name="to" id="email" onchange="return validation()" class="form-control" placeholder="Enter you email">
                                     </div>
-
                                     <div class="py-2">
-
                                         <input type="text" name="subject" id="sub" onchange="return validation()" class="form-control" placeholder="Subject">
                                     </div>
-
                                     <div class="py-2">
                                         <input type="text" name="cc" class="form-control" placeholder="CC">
                                     </div>
@@ -236,23 +202,17 @@ if ($_SESSION['login']) {
                                     <div class=" py-2">
                                         <input type="text" name="bcc" class="form-control" placeholder="BCC">
                                     </div>
-
-
                                     <div class="py-2">
-
                                         <textarea class="form-control" name="message" onchange="return validation()" placeholder="Message body" name="" id="" cols="100" rows="10"></textarea>
                                     </div>
                                     </fieldset>
-
-
-
                             </div>
                         </section>
                     </div>
                     <div class="modal-footer">
                         <input type="file" name="pictures">
-                        <button type="submit" class="btn btn-secondary" name="draft" value="close" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
+                        <button type="submit" class="btn btn-danger" style="padding: 5px 10px 5px 10px;" name="draft" value="close" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" style="padding: 5px 10px 5px 10px;" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
                     </div>
                     </form>
                 </div>
@@ -281,18 +241,14 @@ if ($_SESSION['login']) {
         <?php
             unset($_SESSION['Compose']);
         }
-
-
         ?>
+     
 
-        </script>
 
         <?php
 
         if (isset($_SESSION['draft']) && $_SESSION['draft'] != '') {
-
         ?>
-
             <script>
                 swal({
                     title: "<?php echo $_SESSION['draft']  ?>",
@@ -304,9 +260,53 @@ if ($_SESSION['login']) {
         <?php
             unset($_SESSION['draft']);
         }
+        ?>
+      
+
+        <?php
+
+        if (isset($_SESSION['sent_sent_delete']) && $_SESSION['sent_sent_delete'] != '') {
+
+        ?>
+
+            <script>
+                swal({
+                    title: "<?php echo $_SESSION['sent_sent_delete']  ?>",
+                    text: "",
+                    icon: "<?php echo $_SESSION['sent_delete_code']  ?>",
+                    button: "Ok Done",
+                });
+            </script>
+        <?php
+            unset($_SESSION['sent_sent_delete']);
+        }
 
 
         ?>
+
+
+<?php
+
+if (isset($_SESSION['deleteall_sent']) && $_SESSION['deleteall_sent'] != '') {
+
+?>
+
+    <script>
+        swal({
+            title: "<?php echo $_SESSION['deleteall_sent']  ?>",
+            text: "",
+            icon: "<?php echo $_SESSION['delete_sent']  ?>",
+            button: "Ok Done",
+        });
+    </script>
+<?php
+    unset($_SESSION['deleteall_sent']);
+}
+
+
+?>
+
+<!-- ----------------------------------------------------------------------------------- -->
 
         <script>
             $(document).ready(function() {
@@ -340,6 +340,8 @@ if ($_SESSION['login']) {
                 });
             });
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             //pagination
             $(document).ready(function() {
                 function loadTable(page) {
@@ -372,23 +374,98 @@ if ($_SESSION['login']) {
             });
         </script>
 
-
+<!-- ----------------------------------------------------------------------------- -->
+        
         <script>
             $(document).on("click", ".checkbox", function() {
                 if ($("input[type=checkbox]").is(":checked")) {
                     $(".hide").removeClass("d-none");
                 } else {
                     $(".hide").addClass("d-none");
+
                 }
             });
         </script>
 
+ <!-------------------------------------------------------------------------  -->
 
+        <script>
+            $(document).on("click", ".checkbox_all", function() {
+                if ($("#select_all").is(":checked")) {
+                    $(".showhide").removeClass("d-none");
+                } else {
+                    $(".showhide").addClass("d-none");
+                }
+
+            });
+        </script>
+
+  <!-- ------------------------------------------------------------------- -->
+
+        <script>
+            $(document).ready(function() {
+                $('#select_all').on('click', function() {
+                    if (this.checked) {
+                        $('.checkbox').each(function() {
+                            this.checked = true;
+                        });
+                    } else {
+                        $('.checkbox').each(function() {
+                            this.checked = false;
+                        });
+                    }
+                });
+
+                $('.checkbox').on('click', function() {
+                    if ($('.checkbox:checked').length == $('.checkbox').length) {
+                        $('#select_all').prop('checked', true);
+                        $()
+                    } else {
+                        $('#select_all').prop('checked', false);
+                    }
+                });
+            });
+        </script>
+
+<!--  ----------------------------------------------------------------------------------------->
+
+        <script>
+            $(document).on("click", ".mesaagedetail", function() {
+                let message_id = $(this).attr('dataid')
+                $.ajax({
+                    type: "POST",
+                    url: "../php/dbconnect.php",
+                    data: {
+                        'check_detail_inbox': 1,
+                        'message_id': message_id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                        var html = "<h1>Mailing Subject</h1>";
+                        html += "<h5 style='color:blue'>Participants  </h5>";
+                        html += "<div style='font-size:20px'>Date : " + response[0]['date_time'] + "</div>";
+                        html += "<div> Subject:" + response[0]['subject_line'] + "</div>"
+                        html += "<div> Email:" + response[0]['to_send'] + "</div>";
+                        html += "<div> CC:" + response[0]['cc'] + "</div>";
+                        html += "<div> BCC:" + response[0]['bcc'] + "</div>";
+                        html += "<div> Message:" + response[0]['messsage_send'] + "</div>";
+                        html += "<div> Attachement:" + response[0]['attachement '] + "</div>";
+                        html += "<textarea style='width:600px;height:400px'></textarea>";
+                        html += "<div><button style='padding: 1px 18px 1px 18px; background: blue;border-radius: 10px;' >Reply</button></div>";
+                        html += "<br>";
+                        html += "<div><button style='padding: 1px 18px 1px 18px; background: blue;border-radius: 10px;'>Reply ALL</button></div>";
+                        $('.message_details').html(html)
+                    }
+                });
+            })
+        </script>
+
+<!-- --------------------------------------------------------------------------------------------- -->
 
         <script src="../js1/compose.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
-
     </html>
 <?php
 } else {
