@@ -66,7 +66,7 @@ function validationstart() {
                 document.getElementById('pictures').innerHTML = "Image Uploaded";
             };
             reader.readAsDataURL(fileInput.files[0]);
-            return true
+            return true;
 
         }
     }
