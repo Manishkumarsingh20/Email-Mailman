@@ -201,7 +201,7 @@ class dbconnection
 
     public function trash($email)
     {
-        $sql = "SELECT * FROM email WHERE (to_send='$email' OR from_send='$email') AND (todelete=1 OR fromdelete=1) ";
+        $sql = "SELECT * FROM email WHERE from_send='$email' AND (todelete=1 OR fromdelete=1) ";
         $result = $this->connect_db->query($sql);
         return $result;
     }
@@ -413,7 +413,7 @@ class dbconnection
             $page = 1;
         }
         $offset = ($page - 1) * $limit_per_page;
-        $sql = "SELECT * FROM email WHERE (to_send='$email' OR from_send='$email') AND (todelete=1 OR fromdelete=1)  ORDER BY id DESC LIMIT $offset,$limit_per_page";
+        $sql = "SELECT * FROM email WHERE  from_send='$email' AND (todelete=1 OR fromdelete=1)  ORDER BY id DESC LIMIT $offset,$limit_per_page";
         $result = $this->connect_db->query($sql);
         $output = "";
         if (mysqli_num_rows($result) > 0) {
