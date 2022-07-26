@@ -63,7 +63,7 @@ if ($_SESSION['login']) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Inbox page</title>
+        <title>Dashboard</title>
         <!-- <link rel="stylesheet" href="../css1/emailpage.css"> -->
         <link rel="stylesheet" href="../css1/dashboard.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -226,7 +226,7 @@ if ($_SESSION['login']) {
                     </div>
                     <div class="modal-footer">
                         <input type="file" name="pictures">
-                        <button type="submit" class="btn btn-danger" style="padding: 5px 10px 5px 10px;" name="draft" value="close" data-bs-dismiss="modal">Save to Draft</button>
+                        <button type="submit" class="btn btn-danger" style="padding: 5px 10px 5px 10px;" name="draft" value="close" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success" style="padding: 5px 10px 5px 10px;" onclick="return validation()" value="sent" name="compose_msg_send">Send</button>
                     </div>
                     </form>
