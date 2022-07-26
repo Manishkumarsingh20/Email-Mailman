@@ -57,7 +57,7 @@ if ($_SESSION['login']) {
             <div class="col-lg-6 col-md-6 col-6">
                 <div class="input-group">
                     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button>
+                    <!-- <button type="button" style="padding: 4px 4px 8px 5px ; border-radius:11px 11px 11px 13px" id="search_btn" class="btn btn-primary">Search</button> -->
                 </div>
             </div>
             <div class="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-end mt-md-8">
