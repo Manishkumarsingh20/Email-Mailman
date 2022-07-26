@@ -575,7 +575,7 @@ class dbconnection
     public function trash_restore($email,$message_id){
 
 
-       $sql="UPDATE email SET fromdelete=0 WHERE from_send = '$email' AND id='$message_id'";
+       $sql="UPDATE email SET todelete=0 WHERE from_send = '$email' AND id='$message_id'";
         $result = $this->connect_db->query($sql);
 
     if($result){
