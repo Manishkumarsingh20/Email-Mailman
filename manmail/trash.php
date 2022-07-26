@@ -5,11 +5,11 @@ $obj = new dbconnection;
 
 if ($_SESSION['login']) {
 
-    // if (isset($_POST["restore_msg"]) && $_POST["restore_msg"] != "") {
-    //     $email=$_SESSION['email'];
-    //     $message_id = $_POST['message_trash'];
-    //     $result=$obj->trash_restore($email, $message_id);
-    //     }
+    if (isset($_POST["restore_msg"]) && $_POST["restore_msg"] != "") {
+        $email=$_SESSION['email'];
+        $message_id = $_POST['message_trash'];
+        $result=$obj->trash_restore($email, $message_id);
+        }
 
     if (isset($_POST["delete_all"]) && $_POST["delete_all"] != "") {
         $email = $_SESSION['email'];
@@ -156,7 +156,7 @@ if ($_SESSION['login']) {
                                     <input type="submit" name="delete_all" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none showhide" value="Delete All"></input>
                                     <input type="submit" name="submit_sent" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none hide" value="Delete"></input>
                                     <input type="submit" name="restore_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-success d-none hide" value="Restore"></input>
-                                    <input type="submit" name="unread_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-secondary d-none hide" value="Unread"></input>
+                                    <!-- <input type="submit" name="unread_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-secondary d-none hide" value="Unread"></input> -->
                                 </span>
                             </div>
                             <div class="d-grid gap-2 d-md-block">
@@ -329,6 +329,27 @@ if (isset($_SESSION['deleteall_trash']) && $_SESSION['deleteall_trash'] != '') {
     unset($_SESSION['deleteall_trash']);
 }
 ?>
+
+
+<?php
+
+if (isset($_SESSION['restore_trash']) && $_SESSION['restore_trash'] != '') {
+
+?>
+    <script>
+        swal({
+            title: "<?php echo $_SESSION['restore_trash']  ?>",
+            text: "",
+            icon: "<?php echo $_SESSION['restoreone_trash']  ?>",
+            button: "Ok Done",
+        });
+    </script>
+<?php
+    unset($_SESSION['restore_trash']);
+}
+?>
+
+<!-- -------------------------------------------------------------------------------------- -->
 
         <script>
             $(document).ready(function() {

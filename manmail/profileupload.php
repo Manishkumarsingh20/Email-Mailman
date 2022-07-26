@@ -46,7 +46,7 @@ if ($_SESSION['login']) {
         <nav class="navbar navbar-light bg-info p-3">
             <div class="col-12 col-md-3 col-lg-3 mb-2 flex-wrap flex-md-nowrap d-flex justify-content-between">
                 <a class="navbar-brand" href="#">MAILMAN
-                    <figure img src="../img1/j.png" alt="mailman"></figure>
+                    <figure img src="" alt="mailman"></figure>
                 </a>
                 <!-- //check -->
                 <button class="navbar-toggler mb-3  collapsed d-md-none" type="button" data-toggle="collapse" data-target="#sidebar">

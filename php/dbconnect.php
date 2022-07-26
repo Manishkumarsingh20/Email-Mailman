@@ -362,7 +362,7 @@ class dbconnection
             $page = 1;
         }
         $offset = ($page - 1) * $limit_per_page;
-        $sql = "SELECT * FROM email WHERE from_send='$email'AND fromdelete=0 AND draft=1 LIMIT $offset,$limit_per_page";
+        $sql = "SELECT * FROM email WHERE from_send='$email'AND fromdelete=0 AND draft=1 ORDER BY id DESC LIMIT $offset,$limit_per_page";
         $result = $this->connect_db->query($sql);
         $output = "";
         if (mysqli_num_rows($result) > 0) {
@@ -572,21 +572,19 @@ class dbconnection
         }
     }
 
-    // public function trash_restore($email,$message_id){
+    public function trash_restore($email,$message_id){
 
 
-    //    $sql="UPDATE email SET (fromsend=0 OR tosend=0 OR  draft=0 ) WHERE from_send = '$email' AND id='$message_id'";
+       $sql="UPDATE email SET fromdelete=0 WHERE from_send = '$email' AND id='$message_id'";
+        $result = $this->connect_db->query($sql);
 
-    //     $result = $this->connect_db->query($sql);
-
-    // if($result){
-    //     echo '<script language="javascript">';
-    //     echo 'alert("Restored successfully")';
-    //     echo '</script>';
-    // }else{
-    //     echo "not RESTORED";
-    // }
-    // }
+    if($result){
+        $_SESSION['restore_trash'] = " Message restored successfully";
+        $_SESSION['restoreone_trash'] = "success";
+    }else{
+        echo "not RESTORED";
+    }
+    }
 
 
 }

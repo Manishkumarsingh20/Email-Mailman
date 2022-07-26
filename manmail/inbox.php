@@ -147,7 +147,7 @@ if ($_SESSION['login']) {
                             <div>
                                 <span class="mr-2">
                                     <input type="checkbox" class="checkbox_all" id="select_all" name="" title="select all">
-                                    <input type="submit" name="delete_all" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none showhide" value="Delete"></input>
+                                    <input type="submit" name="delete_all" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none showhide" value="Delete All"></input>
                                     <input type="submit" name="submit_sent" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-danger d-none hide" value="Delete"></input>
                                     <input type="submit" name="read_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-success d-none hide" value="Read"></input>
                                     <input type="submit" name="unread_msg" style="padding: 5px 10px 5px 10px;" class="btn btn-outline-secondary d-none hide" value="Unread"></input>

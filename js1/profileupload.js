@@ -47,7 +47,7 @@ function validationstart() {
 
     var fileInput = document.getElementById('file')
     var filePath = fileInput.value;
-    var f = document.getElementById("file").files[0];
+    var f = document.getElementById('file').files[0];
     var fsize = f.size || f.fileSize;
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -66,7 +66,7 @@ function validationstart() {
                 document.getElementById('pictures').innerHTML = "Image Uploaded";
             };
             reader.readAsDataURL(fileInput.files[0]);
-            return true;
+            return true
 
         }
     }
