@@ -73,7 +73,7 @@ session_start();
 
             <!-- upload img start  -->
             <div class="upload">
-                <img id="output" src="../img1/profile.jpg" width="100" height="100">
+                <img id="output" src="../img1/profile.jpg" width="150" height="150">
                 <div class="round">
                 </div>
             </div>
