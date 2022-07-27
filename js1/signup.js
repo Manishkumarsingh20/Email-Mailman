@@ -12,6 +12,7 @@ function validationstart() {
     else {
         firstname1.style.border = "2px solid red";
         firstnamespane.innerHTML = "**Please fill firstname without space";
+        return false;
         
 
     }
@@ -27,6 +28,7 @@ function validationstart() {
     } else {
         lastname1.style.border = "2px solid red";
         lastnamespane.innerHTML = "**Please use only letters without space";
+        return false;
         
 
     }
@@ -41,6 +43,7 @@ function validationstart() {
     if (username.match(pattern)) {
     } else {
         usernamespane.innerHTML = "**Please donot give space(0-9 or a-zA-Z)";
+        return false;
         
 
     }
@@ -54,6 +57,7 @@ function validationstart() {
     if (email1.match(email2)) {
     } else {
         emailnamespane.innerHTML = "**Please add @mailman.com";
+        return false;
      
     }
 
@@ -70,6 +74,7 @@ function validationstart() {
     } else {
         recoveryemail1.style.border = "2px solid red";
         recovernamespane.innerHTML = "**Please add one recovery Email";
+        return false;
         
 
     }
@@ -77,45 +82,45 @@ function validationstart() {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    // var pass1 = document.getElementById("pass1").value;
-    // var password1 = document.getElementById("pass1");
-    // var passwordnamespane = document.getElementById("passwordd");
-    // var lowercase = new RegExp('(?=.*[a-z])');
-    // var uppercase = new RegExp('(?=.*[A-z])');
-    // var number = new RegExp('(?=.*[0-9])');
-    // var specialchar = new RegExp('(?=.*[!@#\$%\^&\*])');
-    // var sixchar = new RegExp('(?=.{6,})');
+    var pass1 = document.getElementById("pass1").value;
+    var password1 = document.getElementById("pass1");
+    var passwordnamespane = document.getElementById("passwordd");
+    var lowercase = new RegExp('(?=.*[a-z])');
+    var uppercase = new RegExp('(?=.*[A-z])');
+    var number = new RegExp('(?=.*[0-9])');
+    var specialchar = new RegExp('(?=.*[!@#\$%\^&\*])');
+    var sixchar = new RegExp('(?=.{6,})');
 
-    // if (pass1.match(sixchar)) {
-    //     passwordnamespane.innerHTML = "";
-    // } else {
-    //     passwordnamespane.innerHTML = "**Password length should be six or greater";
-    //     return false
-    // }
-    // if (pass1.match(uppercase)) {
-    //     passwordnamespane.innerHTML = "";
-    // } else {
-    //     passwordnamespane.innerHTML = "**Use atleast one Uppercase";
-    //     return false
-    // }
-    // if (pass1.match(number)) {
-    //     passwordnamespane.innerHTML = "";
-    // } else {
-    //     passwordnamespane.innerHTML = "**Use atleast one number";
-    //     return false
-    // }
-    // if (pass1.match(specialchar)) {
-    //     passwordnamespane.innerHTML = "";
-    // } else {
-    //     passwordnamespane.innerHTML = "**Use atleast one special character";
-    //     return false
-    // }
-    // if (pass1.match(lowercase)) {
-    //     passwordnamespane.innerHTML = "";
-    // } else {
-    //     passwordnamespane.innerHTML = "**Use atleast one lowercase";
-    //     return false
-    // }
+    if (pass1.match(sixchar)) {
+        passwordnamespane.innerHTML = "";
+    } else {
+        passwordnamespane.innerHTML = "**Password length should be six or greater";
+        return false
+    }
+    if (pass1.match(uppercase)) {
+        passwordnamespane.innerHTML = "";
+    } else {
+        passwordnamespane.innerHTML = "**Use atleast one Uppercase";
+        return false
+    }
+    if (pass1.match(number)) {
+        passwordnamespane.innerHTML = "";
+    } else {
+        passwordnamespane.innerHTML = "**Use atleast one number";
+        return false
+    }
+    if (pass1.match(specialchar)) {
+        passwordnamespane.innerHTML = "";
+    } else {
+        passwordnamespane.innerHTML = "**Use atleast one special character";
+        return false
+    }
+    if (pass1.match(lowercase)) {
+        passwordnamespane.innerHTML = "";
+    } else {
+        passwordnamespane.innerHTML = "**Use atleast one lowercase";
+        return false
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,6 +134,7 @@ function validationstart() {
     } else {
         cpassword1.style.border = "2px solid red";
         confirmpassword.innerHTML = "**Please fill the confirmation Password";
+        return false;
      
 
     }
