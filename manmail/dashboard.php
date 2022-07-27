@@ -108,7 +108,7 @@ if ($_SESSION['login']) {
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebar" class="d-md-block col-lg-2 col-md-3 hr my-3 sidebar collapse">
+                <nav id="sidebar" class=" col-lg-2 col-md-3  my-3 sidebar collapse">
                     <div class="position-sticky">
                         <ul class="nav flex-column">
                             <li class="compose">
@@ -119,25 +119,21 @@ if ($_SESSION['login']) {
                                     <span class="ml-2">Inbox</span>
                                 </a>
                             </li>
-                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="sent.php">
                                     <span class="ml-2">Sent</span>
                                 </a>
                             </li>
-                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="draft.php">
                                     <span class="ml-2">Draft</span>
                                 </a>
                             </li>
-                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="trash.php">
                                     <span class="ml-2">Trash</span>
                                 </a>
                             </li>
-                            <hr>
                         </ul>
                     </div>
                 </nav>
