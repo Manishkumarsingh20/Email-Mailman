@@ -31,7 +31,7 @@
         $mail->setFrom('manishkumarsingh1798@gmail.com', 'Admin');
         $mail->addAddress($email);     
 
-        $code =base64_encode(substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,10));
+        $code =substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,10);
     
         // Content
         $mail->isHTML(true);                              
