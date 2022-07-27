@@ -107,9 +107,9 @@ if ($_SESSION['login']) {
             </div>
         </nav>
         <div class="container-fluid">
-            <div class="row vr">
-                <nav id="sidebar" class="d-md-block col-lg-2 col-md-3  my-3 sidebar collapse">
-                    <div class="position-sticky">
+            <div class="row">
+                <nav id="sidebar" class="d-md-block col-lg-2 col-md-3  sidebar collapse">
+                    <div class="position-sticky vr">
                         <ul class="nav flex-column">
                             <li class="compose">
                                 <button class=btn class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Compose</button>
