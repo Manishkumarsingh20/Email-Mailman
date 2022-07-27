@@ -433,7 +433,7 @@ class dbconnection
 
             $output .= " </tbody>
         </table>";
-            $sql_total = "SELECT * FROM email WHERE from_send='$email'AND (todelete=1 OR fromdelete=1)  ";
+            $sql_total = "SELECT * FROM email WHERE (from_send='$email' OR to_send='$email') AND (todelete=1 OR fromdelete=1)  ";
             $records = $this->connect_db->query($sql_total);;
             $total_record = mysqli_num_rows($records);
             $total_pages = ceil($total_record / $limit_per_page);
@@ -525,7 +525,7 @@ class dbconnection
         $sql = "UPDATE email SET draft=0 WHERE from_send = '$email'";
         $result = $this->connect_db->query($sql);
         if ($result) {
-            $_SESSION['deleteall_draft'] = "All Message Deleted  successfully";
+           $_SESSION['deleteall_draft'] = "All Message Deleted  successfully";
             $_SESSION['delete_draft'] = "success";
         } else {
             echo "not deleted";
@@ -572,20 +572,21 @@ class dbconnection
         }
     }
 
-    public function trash_restore($email, $message_id)
-    {
+    public function trash_restore($email,$message_id){
 
 
-        $sql = "UPDATE email SET fromdelete=0 WHERE from_send = '$email' AND id='$message_id'";
+       $sql="UPDATE email SET fromdelete=0 WHERE from_send = '$email' AND id='$message_id'";
         $result = $this->connect_db->query($sql);
 
-        if ($result) {
-            $_SESSION['restore_trash'] = " Message restored successfully";
-            $_SESSION['restoreone_trash'] = "success";
-        } else {
-            echo "not RESTORED";
-        }
+    if($result){
+        $_SESSION['restore_trash'] = " Message restored successfully";
+        $_SESSION['restoreone_trash'] = "success";
+    }else{
+        echo "not RESTORED";
     }
+    }
+
+
 }
 
 
