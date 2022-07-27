@@ -137,7 +137,7 @@ session_start();
                             <span id=checkboxx></span>
                         </div>
                         <div>
-                            <input type="file" id="file" name="picture" style="position:relative;top: -482px;left:181px" onchange="loadFile(event)" onchange="return validationstart()" autocomplete="off">
+                            <input type="file" id="file" name="picture" style="position:relative;top: -482px;left:181px"  onclick="return validationstart()" autocomplete="off">
                             <span id="pictures" style="position: absolute;top:207px;left:253px"></spna>
                         </div>
 
