@@ -119,21 +119,25 @@ if ($_SESSION['login']) {
                                     <span class="ml-2">Inbox</span>
                                 </a>
                             </li>
+                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="sent.php">
                                     <span class="ml-2">Sent</span>
                                 </a>
                             </li>
+                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="draft.php">
                                     <span class="ml-2">Draft</span>
                                 </a>
                             </li>
+                            <hr>
                             <li class="nav-item">
                                 <a class="nav-link" href="trash.php">
                                     <span class="ml-2">Trash</span>
                                 </a>
                             </li>
+                            <hr>
                         </ul>
                     </div>
                 </nav>
