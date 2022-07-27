@@ -433,7 +433,7 @@ class dbconnection
 
             $output .= " </tbody>
         </table>";
-            $sql_total = "SELECT * FROM email WHERE (from_send='$email' OR to_send='$email') AND (todelete=1 OR fromdelete=1)  ";
+            $sql_total = "SELECT * FROM email WHERE from_send='$email'AND (todelete=1 OR fromdelete=1)  ";
             $records = $this->connect_db->query($sql_total);;
             $total_record = mysqli_num_rows($records);
             $total_pages = ceil($total_record / $limit_per_page);
