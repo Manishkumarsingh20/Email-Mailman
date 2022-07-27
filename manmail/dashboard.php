@@ -107,7 +107,7 @@ if ($_SESSION['login']) {
             </div>
         </nav>
         <div class="container-fluid">
-            <div class="row">
+            <div class="row vr">
                 <nav id="sidebar" class="d-md-block col-lg-2 col-md-3  my-3 sidebar collapse">
                     <div class="position-sticky">
                         <ul class="nav flex-column">
