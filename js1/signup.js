@@ -77,45 +77,45 @@ function validationstart() {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    var pass1 = document.getElementById("pass1").value;
-    var password1 = document.getElementById("pass1");
-    var passwordnamespane = document.getElementById("passwordd");
-    var lowercase = new RegExp('(?=.*[a-z])');
-    var uppercase = new RegExp('(?=.*[A-z])');
-    var number = new RegExp('(?=.*[0-9])');
-    var specialchar = new RegExp('(?=.*[!@#\$%\^&\*])');
-    var sixchar = new RegExp('(?=.{6,})');
+    // var pass1 = document.getElementById("pass1").value;
+    // var password1 = document.getElementById("pass1");
+    // var passwordnamespane = document.getElementById("passwordd");
+    // var lowercase = new RegExp('(?=.*[a-z])');
+    // var uppercase = new RegExp('(?=.*[A-z])');
+    // var number = new RegExp('(?=.*[0-9])');
+    // var specialchar = new RegExp('(?=.*[!@#\$%\^&\*])');
+    // var sixchar = new RegExp('(?=.{6,})');
 
-    if (pass1.match(sixchar)) {
-        passwordnamespane.innerHTML = "";
-    } else {
-        passwordnamespane.innerHTML = "**Password length should be six or greater";
-        return false
-    }
-    if (pass1.match(uppercase)) {
-        passwordnamespane.innerHTML = "";
-    } else {
-        passwordnamespane.innerHTML = "**Use atleast one Uppercase";
-        return false
-    }
-    if (pass1.match(number)) {
-        passwordnamespane.innerHTML = "";
-    } else {
-        passwordnamespane.innerHTML = "**Use atleast one number";
-        return false
-    }
-    if (pass1.match(specialchar)) {
-        passwordnamespane.innerHTML = "";
-    } else {
-        passwordnamespane.innerHTML = "**Use atleast one special character";
-        return false
-    }
-    if (pass1.match(lowercase)) {
-        passwordnamespane.innerHTML = "";
-    } else {
-        passwordnamespane.innerHTML = "**Use atleast one lowercase";
-        return false
-    }
+    // if (pass1.match(sixchar)) {
+    //     passwordnamespane.innerHTML = "";
+    // } else {
+    //     passwordnamespane.innerHTML = "**Password length should be six or greater";
+    //     return false
+    // }
+    // if (pass1.match(uppercase)) {
+    //     passwordnamespane.innerHTML = "";
+    // } else {
+    //     passwordnamespane.innerHTML = "**Use atleast one Uppercase";
+    //     return false
+    // }
+    // if (pass1.match(number)) {
+    //     passwordnamespane.innerHTML = "";
+    // } else {
+    //     passwordnamespane.innerHTML = "**Use atleast one number";
+    //     return false
+    // }
+    // if (pass1.match(specialchar)) {
+    //     passwordnamespane.innerHTML = "";
+    // } else {
+    //     passwordnamespane.innerHTML = "**Use atleast one special character";
+    //     return false
+    // }
+    // if (pass1.match(lowercase)) {
+    //     passwordnamespane.innerHTML = "";
+    // } else {
+    //     passwordnamespane.innerHTML = "**Use atleast one lowercase";
+    //     return false
+    // }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
