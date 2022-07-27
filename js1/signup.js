@@ -12,7 +12,7 @@ function validationstart() {
     else {
         firstname1.style.border = "2px solid red";
         firstnamespane.innerHTML = "**Please fill firstname without space";
-        return false;
+        
 
     }
     //////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ function validationstart() {
     } else {
         lastname1.style.border = "2px solid red";
         lastnamespane.innerHTML = "**Please use only letters without space";
-        return false;
+        
 
     }
 
@@ -41,7 +41,7 @@ function validationstart() {
     if (username.match(pattern)) {
     } else {
         usernamespane.innerHTML = "**Please donot give space(0-9 or a-zA-Z)";
-        return false;
+        
 
     }
 
@@ -54,7 +54,7 @@ function validationstart() {
     if (email1.match(email2)) {
     } else {
         emailnamespane.innerHTML = "**Please add @mailman.com";
-        return false;
+     
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ function validationstart() {
     } else {
         recoveryemail1.style.border = "2px solid red";
         recovernamespane.innerHTML = "**Please add one recovery Email";
-        return false;
+        
 
     }
 
@@ -129,7 +129,7 @@ function validationstart() {
     } else {
         cpassword1.style.border = "2px solid red";
         confirmpassword.innerHTML = "**Please fill the confirmation Password";
-        return false;
+     
 
     }
 
